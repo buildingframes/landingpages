@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frame Asset Demo</title>
+  <link rel="stylesheet" href="frame-brand.css">
+  <style>
+    body{margin:0;background:var(--frame-gradient-bg);color:var(--frame-text);font-family:Inter,Arial,sans-serif}
+    .wrap{max-width:1100px;margin:0 auto;padding:24px}
+    .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
+    .hero-card,.panel{background:var(--frame-panel);border:1px solid var(--frame-border);border-radius:24px}
+    .hero-card{padding:28px}
+    h1{font-size:64px;line-height:.96;letter-spacing:-.05em;margin:0 0 16px}
+    .accent{color:var(--frame-accent)}
+    .muted{color:var(--frame-text-muted);line-height:1.7}
+    .visual{position:relative;min-height:420px;overflow:hidden}
+    .visual .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .visual .mark{position:absolute;inset:50%;transform:translate(-50%,-50%);width:64%;max-width:320px}
+    .icon-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px}
+    .panel{padding:18px;text-align:center}
+    .panel img{width:64px;height:64px;margin:0 auto 10px}
+    .row{display:flex;gap:16px;align-items:center;margin-top:24px}
+    .logo{height:42px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="row">
+      <img class="logo" src="frame-logo.png" alt="Frame logo">
+    </div>
+    <div class="grid" style="margin-top:24px">
+      <div class="hero-card">
+        <h1>Could this be the first <span class="accent">publicly accountable</span> blockchain?</h1>
+        <div class="muted">These assets are usable web files based on the same visual direction: dark background, cyan glow, minimal line icons, geometric cube styling, and the real Frame logo.</div>
+      </div>
+      <div class="hero-card visual">
+        <img class="bg" src="hero-grid-bg.svg" alt="">
+        <img class="mark" src="hero-frame-mark.svg" alt="">
+      </div>
+    </div>
+    <div class="icon-grid">
+      <div class="panel"><img src="icon-discord.svg"><div>Discord</div></div>
+      <div class="panel"><img src="icon-telegram.svg"><div>Telegram</div></div>
+      <div class="panel"><img src="icon-email.svg"><div>Email</div></div>
+      <div class="panel"><img src="cube-cluster.svg"><div>Cubes</div></div>
+      <div class="panel"><img src="icon-shield-check.svg"><div>Shield</div></div>
+      <div class="panel"><img src="icon-community.svg"><div>Community</div></div>
+      <div class="panel"><img src="icon-chip.svg"><div>AI</div></div>
+      <div class="panel"><img src="icon-multichain.svg"><div>Multichain</div></div>
+    </div>
+  </div>
+</body>
+</html>

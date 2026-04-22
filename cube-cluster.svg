@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="160" viewBox="0 0 220 160">
+  <defs>
+    <linearGradient id="face" x1="0" x2="1">
+      <stop offset="0%" stop-color="#0d2b3e"/>
+      <stop offset="100%" stop-color="#071722"/>
+    </linearGradient>
+    <linearGradient id="top" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="rgba(17,215,234,.28)"/>
+      <stop offset="100%" stop-color="rgba(17,215,234,.08)"/>
+    </linearGradient>
+  </defs>
+  <g stroke="#11d7ea" stroke-opacity=".22" fill="url(#face)">
+    <g transform="translate(20 54)">
+      <rect width="42" height="42"/>
+      <polygon points="0,0 10,-10 52,-10 42,0" fill="url(#top)"/>
+      <polygon points="42,0 52,-10 52,32 42,42" fill="rgba(17,215,234,.10)"/>
+    </g>
+    <g transform="translate(54 28)">
+      <rect width="42" height="42"/>
+      <polygon points="0,0 10,-10 52,-10 42,0" fill="url(#top)"/>
+      <polygon points="42,0 52,-10 52,32 42,42" fill="rgba(17,215,234,.10)"/>
+    </g>
+    <g transform="translate(92 56)">
+      <rect width="42" height="42"/>
+      <polygon points="0,0 10,-10 52,-10 42,0" fill="url(#top)"/>
+      <polygon points="42,0 52,-10 52,32 42,42" fill="rgba(17,215,234,.10)"/>
+    </g>
+    <g transform="translate(126 86)">
+      <rect width="42" height="42"/>
+      <polygon points="0,0 10,-10 52,-10 42,0" fill="url(#top)"/>
+      <polygon points="42,0 52,-10 52,32 42,42" fill="rgba(17,215,234,.10)"/>
+    </g>
+  </g>
+</svg>

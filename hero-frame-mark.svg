@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640" viewBox="0 0 640 640">
+  <defs>
+    <filter id="g"><feGaussianBlur stdDeviation="12" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <radialGradient id="fill" cx="50%" cy="50%">
+      <stop offset="0%" stop-color="#11d7ea" stop-opacity=".12"/>
+      <stop offset="70%" stop-color="#11d7ea" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="640" height="640" fill="none"/>
+  <g transform="translate(320,320) rotate(45)" filter="url(#g)">
+    <rect x="-150" y="-150" width="300" height="300" rx="30" fill="url(#fill)" stroke="#11d7ea" stroke-width="14"/>
+  </g>
+  <text x="320" y="365" text-anchor="middle" font-size="160" font-family="Inter, Arial, sans-serif" font-weight="800" fill="#11d7ea">F</text>
+</svg>
