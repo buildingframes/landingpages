@@ -1,660 +1,428 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Frame — Publicly Accountable Blockchain</title>
-  <meta name="description" content="Public Company Standards Meet Blockchain" />
+  <title>Frame — Public Company Standards Meet Blockchain</title>
+  <meta name="description" content="Public company standards meet blockchain. Join the Frame community." />
   <link rel="stylesheet" href="frame-brand.css" />
   <style>
     *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
     body{
       margin:0;
-      background:var(--frame-gradient-bg);
+      background:
+        radial-gradient(circle at 78% 10%, rgba(17,215,234,.13), transparent 24%),
+        linear-gradient(180deg, #071722 0%, #05111a 48%, #041019 100%);
       color:var(--frame-text);
       font-family:Inter, Arial, sans-serif;
     }
     a{text-decoration:none;color:inherit}
     img{display:block;max-width:100%}
-    .container{max-width:1120px;margin:0 auto;padding:0 20px}
-    .topbar{
-      position:sticky;top:0;z-index:20;
-      background:rgba(4,16,25,.88);
-      backdrop-filter:blur(10px);
-      border-bottom:1px solid rgba(255,255,255,.08);
+    .page{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:28px 18px;
+    }
+    .shell{
+      width:min(1180px, 100%);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:20px;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 74% 22%, rgba(17,215,234,.11), transparent 30%),
+        linear-gradient(180deg, rgba(8,23,34,.96), rgba(5,17,26,.98));
+      box-shadow:0 28px 80px rgba(0,0,0,.34);
     }
     .nav{
-      min-height:74px;
-      display:flex;align-items:center;justify-content:space-between;
+      min-height:72px;
+      padding:0 36px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      background:rgba(4,16,25,.62);
     }
-    .brand img{height:40px;width:auto}
+    .brand img{height:38px;width:auto}
     .btn{
-      border:none;cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:none;
+      cursor:pointer;
       background:linear-gradient(180deg, var(--frame-accent), var(--frame-accent-2));
       color:#031017;
       padding:13px 22px;
       border-radius:10px;
-      font-weight:700;
-      font-size:.95rem;
+      font-weight:800;
+      font-size:.92rem;
       letter-spacing:.02em;
-      box-shadow:var(--frame-glow);
+      box-shadow:0 0 26px rgba(17,215,234,.20);
       white-space:nowrap;
     }
-
+    .main{
+      padding:36px 42px 18px;
+    }
     .hero{
       display:grid;
-      grid-template-columns:1.02fr .98fr;
-      gap:34px;
-      align-items:start;
-      padding:34px 0 8px;
+      grid-template-columns:1fr .92fr;
+      gap:54px;
+      align-items:center;
     }
     h1{
       margin:0;
-      max-width:520px;
-      font-size:4.4rem;
-      line-height:.95;
-      letter-spacing:-.05em;
-      font-weight:800;
+      max-width:530px;
+      font-size:4.15rem;
+      line-height:.94;
+      letter-spacing:-.055em;
+      font-weight:900;
+      text-transform:uppercase;
     }
     .accent{color:var(--frame-accent)}
     .hero-copy p{
       margin:22px 0 0;
-      max-width:470px;
-      color:var(--frame-text-muted);
-      font-size:1.06rem;
+      max-width:520px;
+      color:#fff;
+      font-size:1rem;
       line-height:1.65;
+      font-weight:600;
     }
+    .hero-copy p.secondary{
+      margin-top:20px;
+      color:rgba(255,255,255,.92);
+      font-weight:600;
+    }
+
     .hero-visual{
       position:relative;
-      min-height:500px;
+      min-height:430px;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.09);
       overflow:hidden;
-      border-radius:28px;
-      border:1px solid rgba(255,255,255,.08);
-      background:linear-gradient(180deg,#071722,#041019);
+      background:
+        radial-gradient(circle at 50% 22%, rgba(17,215,234,.14), transparent 34%),
+        linear-gradient(180deg,#0a2230,#071722);
     }
     .hero-visual .bg{
-      position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.92;
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      opacity:.50;
     }
     .hero-visual .mark{
-      position:absolute;left:50%;top:50%;
+      position:absolute;
+      top:50%;
+      left:50%;
       transform:translate(-50%,-50%);
       width:78%;
       max-width:460px;
+      border-radius:2px;
+      filter:drop-shadow(0 0 28px rgba(17,215,234,.10));
     }
     .hero-visual .cubes{
       position:absolute;
-      left:32px;bottom:24px;
-      width:140px;
-      opacity:.95;
+      left:34px;
+      bottom:34px;
+      width:92px;
+      opacity:.7;
+    }
+    .hero-overlay-card{
+      position:absolute;
+      right:24px;
+      bottom:24px;
+      width:280px;
+      padding:18px;
+      background:rgba(5,12,20,0.84);
+      border:1px solid rgba(17,215,234,0.36);
+      border-radius:16px;
+      backdrop-filter:blur(12px);
+      box-shadow:0 10px 28px rgba(0,0,0,0.30);
+      z-index:3;
+    }
+    .hero-overlay-title{
+      color:#11d7ea;
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:1px;
+      text-transform:uppercase;
+      margin-bottom:10px;
+    }
+    .hero-overlay-card p{
+      color:#fff;
+      font-size:13px;
+      line-height:1.55;
+      margin:0 0 10px;
+      font-weight:700;
     }
 
     .cta-row{
-      margin-top:24px;
+      margin-top:28px;
       display:grid;
       grid-template-columns:1.18fr 1fr 1fr 1fr;
-      border:1px solid rgba(255,255,255,.14);
-      border-radius:18px;
+      border:1px solid rgba(255,255,255,.15);
+      border-radius:16px;
       overflow:hidden;
-      background:rgba(8,23,34,.88);
+      background:rgba(8,23,34,.74);
     }
     .cta-card{
-      min-height:126px;
+      min-height:122px;
       padding:18px 18px;
       display:flex;
       gap:14px;
       align-items:flex-start;
       border-right:1px solid rgba(255,255,255,.12);
+      background:transparent;
+      text-align:left;
+      color:#fff;
+      cursor:pointer;
     }
     .cta-card:last-child{border-right:none}
-    .cta-card.primary{display:block}
+    .cta-card.primary{display:block;cursor:default}
     .cta-card h3{
       margin:0;
-      font-size:.92rem;
+      font-size:.88rem;
       line-height:1.25;
       letter-spacing:.02em;
       text-transform:uppercase;
       color:#fff;
+      font-weight:900;
     }
     .cta-card.primary h3{color:var(--frame-accent)}
     .cta-card p{
       margin:9px 0 0;
-      color:rgba(255,255,255,.78);
-      font-size:.95rem;
-      line-height:1.55;
-    }
-    .mini-icon{
-      width:54px;height:54px;flex:0 0 auto;
-      display:grid;place-items:center;
-    }
-    .mini-icon img{width:44px;height:44px}
-
-    section{padding:30px 0 0}
-    .section-title{
-      text-align:center;
-      margin:0;
-      font-size:2.08rem;
-      letter-spacing:-.03em;
-      font-weight:500;
-    }
-    .section-sub{
-      text-align:center;
-      color:rgba(255,255,255,.78);
-      margin:8px auto 0;
-      font-size:1.04rem;
-      max-width:760px;
-    }
-
-    .accountability{
-      margin-top:20px;
-      display:grid;
-      grid-template-columns:repeat(5,1fr);
-      gap:16px;
-    }
-    .feature{
-      background:rgba(8,23,34,.72);
-      border:1px solid rgba(255,255,255,.10);
-      border-radius:18px;
-      padding:18px 16px;
-      text-align:center;
-    }
-    .feature .icon-wrap{
-      width:78px;height:78px;
-      margin:0 auto 12px;
-      display:grid;place-items:center;
-      background:rgba(255,255,255,.02);
-      border:1px solid rgba(17,215,234,.12);
-      border-radius:16px;
-    }
-    .feature .icon-wrap img{width:54px;height:54px}
-    .feature h3{
-      margin:0;
-      color:var(--frame-accent);
-      font-size:.92rem;
-      text-transform:uppercase;
-      line-height:1.3;
-      min-height:50px;
-    }
-    .feature p{
-      margin:12px 0 0;
-      color:rgba(255,255,255,.74);
-      font-size:.93rem;
-      line-height:1.65;
-    }
-
-    .quote-card{
-      margin-top:28px;
-      display:grid;
-      grid-template-columns:300px 1fr;
-      gap:6px;
-      align-items:center;
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:18px;
-      overflow:hidden;
-      background:linear-gradient(180deg, rgba(8,23,34,.96), rgba(7,20,31,.96));
-    }
-    .quote-left{
-      padding:24px 0 0 24px;
-      min-height:268px;
-      display:flex;align-items:flex-end;
-      background:radial-gradient(circle at 30% 38%, rgba(17,215,234,.10), transparent 46%);
-    }
-    .quote-left img{
-      width:225px;height:225px;object-fit:contain;object-position:bottom left;
-    }
-    .quote-right{padding:22px 28px 22px 0}
-    .quote-mark{
-      color:var(--frame-accent);
-      font-size:5rem;
-      line-height:.9;
-      margin-bottom:4px;
-    }
-    blockquote{
-      margin:0;
-      max-width:560px;
-      font-size:1.52rem;
-      line-height:1.38;
-      letter-spacing:-.02em;
-    }
-    .byline{
-      color:var(--frame-accent);
-      margin-top:16px;
-      font-size:1.04rem;
+      color:#fff;
+      font-size:.90rem;
+      line-height:1.5;
       font-weight:600;
     }
-    .role{
-      margin-top:6px;
-      color:rgba(255,255,255,.8);
-      font-size:.95rem;
-    }
-
-    .vision-grid{
-      margin-top:22px;
+    .mini-icon{
+      width:48px;
+      height:48px;
+      flex:0 0 auto;
       display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:14px;
+      place-items:center;
     }
-    .vision-card{
-      min-height:214px;
-      background:rgba(8,23,34,.76);
-      border:1px solid rgba(255,255,255,.10);
-      border-radius:18px;
-      padding:20px 16px 18px;
-      text-align:center;
-    }
-    .vision-card .icon-wrap{
-      width:82px;height:82px;
-      margin:0 auto 14px;
-      display:grid;place-items:center;
-      background:rgba(255,255,255,.02);
-      border:1px solid rgba(17,215,234,.12);
-      border-radius:16px;
-    }
-    .vision-card .icon-wrap img{width:56px;height:56px}
-    .vision-card h3{
-      margin:0;
-      color:#fff;
-      font-size:.97rem;
-      line-height:1.28;
-      text-transform:uppercase;
-    }
-    .vision-card p{
-      margin:12px 0 0;
-      color:rgba(255,255,255,.74);
-      font-size:.94rem;
-      line-height:1.62;
-    }
-
-    .bottom-band{
-      margin-top:18px;
-      display:grid;
-      grid-template-columns:1.2fr .98fr;
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:18px;
-      overflow:hidden;
-      background:rgba(8,23,34,.92);
-    }
-    .bottom-left{
-      display:flex;gap:18px;align-items:flex-start;
-      padding:18px 18px 16px;
-    }
-    .bottom-left .cubes{width:108px;height:auto;flex:0 0 auto}
-    .bottom-left h3{
-      margin:4px 0 0;
-      font-size:1.48rem;
-      line-height:1.05;
-      letter-spacing:-.03em;
-      text-transform:uppercase;
-    }
-    .bottom-left h3 .accent{display:block;margin-top:4px}
-    .bottom-left p{
-      margin:14px 0 0;
-      max-width:380px;
-      color:rgba(255,255,255,.74);
-      font-size:.95rem;
-      line-height:1.7;
-    }
-    .bottom-links{
-      padding:10px;
-      display:grid;
-      gap:10px;
-      align-content:center;
-    }
-    .bottom-link{
-      border:1px solid rgba(17,215,234,.22);
-      border-radius:12px;
-      padding:14px 16px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      background:rgba(5,18,27,.62);
-    }
-    .bottom-link strong{
-      color:var(--frame-accent);
-      text-transform:uppercase;
-      font-size:.95rem;
-      font-weight:700;
-    }
-    .bottom-link span{
-      color:rgba(255,255,255,.78);
-      margin-left:10px;
-      font-size:.94rem;
-    }
-    .bottom-link .arrow{color:var(--frame-accent);font-size:1.25rem}
+    .mini-icon img{width:42px;height:42px}
 
     footer{
-      padding:14px 0 28px;
+      padding:18px 24px 22px;
       text-align:center;
+      color:rgba(255,255,255,.62);
+      font-size:.82rem;
+      line-height:1.5;
     }
-    footer img{height:28px;width:auto;margin:0 auto 10px}
-    footer .copy{
-      color:rgba(255,255,255,.56);
-      font-size:.85rem;
-      line-height:1.45;
+    footer img{
+      height:28px;
+      width:auto;
+      margin:0 auto 8px;
+    }
+    footer a{
+      color:var(--frame-accent);
+      text-decoration:underline;
+      text-underline-offset:3px;
+    }
+    .footer-links{
+      margin-top:7px;
+      display:flex;
+      justify-content:center;
+      gap:14px;
+      flex-wrap:wrap;
     }
 
     .modal-backdrop{
-      position:fixed;inset:0;background:rgba(0,0,0,.62);
-      display:none;align-items:center;justify-content:center;padding:20px;z-index:30;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.66);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      z-index:50;
     }
     .modal-backdrop.open{display:flex}
     .modal{
-      width:min(720px,100%);
+      width:min(680px,100%);
       border:1px solid rgba(255,255,255,.14);
       border-radius:22px;
-      background:linear-gradient(180deg, #0a1b28, #07131d);
+      background:linear-gradient(180deg,#0a1b28,#07131d);
       padding:24px;
       position:relative;
+      box-shadow:0 24px 80px rgba(0,0,0,.5);
     }
-    .modal h3{margin:0;font-size:1.8rem}
+    .modal h3{margin:0;font-size:1.7rem}
     .modal p{color:rgba(255,255,255,.78);line-height:1.7;margin:10px 0 0}
     .close{
-      position:absolute;right:16px;top:16px;width:40px;height:40px;border-radius:12px;
-      border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);color:white;cursor:pointer;font-size:1.2rem;
+      position:absolute;
+      right:16px;
+      top:16px;
+      width:40px;
+      height:40px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.03);
+      color:white;
+      cursor:pointer;
+      font-size:1.2rem;
     }
     .form-row{display:grid;grid-template-columns:1fr auto;gap:12px;margin-top:22px}
     input[type="email"]{
-      width:100%;padding:18px 20px;border-radius:18px;border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.04);color:white;font-size:1rem;
+      width:100%;
+      padding:17px 18px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.04);
+      color:white;
+      font-size:1rem;
     }
     input::placeholder{color:rgba(255,255,255,.46)}
     .submit{
-      padding:16px 20px;border-radius:18px;border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.06);color:white;font-weight:700;
+      padding:16px 20px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:white;
+      font-weight:800;
     }
-    .submit.enabled{background:linear-gradient(180deg,var(--frame-accent),var(--frame-accent-2));color:#021017;cursor:pointer}
+    .submit.enabled{
+      background:linear-gradient(180deg,var(--frame-accent),var(--frame-accent-2));
+      color:#021017;
+      cursor:pointer;
+    }
     .consent{
-      margin-top:14px;display:flex;gap:12px;align-items:flex-start;color:rgba(255,255,255,.76);line-height:1.6;font-size:.95rem;
+      margin-top:14px;
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      color:rgba(255,255,255,.76);
+      line-height:1.6;
+      font-size:.95rem;
     }
     .consent input{width:18px;height:18px;accent-color:var(--frame-accent);margin-top:3px}
     .consent a{color:var(--frame-accent);text-decoration:underline}
 
-    
-    .hero-overlay-card{
-      position:absolute;
-      right:24px;
-      bottom:24px;
-      width:300px;
-      padding:20px;
-      background:rgba(5,12,20,0.82);
-      border:1px solid rgba(17,215,234,0.35);
-      border-radius:18px;
-      backdrop-filter:blur(12px);
-      box-shadow:0 10px 30px rgba(0,0,0,0.28);
-      z-index:3;
-    }
-    .hero-overlay-title{
-      color:#11d7ea;
-      font-size:14px;
-      font-weight:700;
-      letter-spacing:1px;
-      text-transform:uppercase;
-      margin-bottom:12px;
-    }
-    .hero-overlay-card p{
-      color:rgba(255,255,255,0.9);
-      font-size:14px;
-      line-height:1.6;
-      margin:0 0 10px;
-      max-width:none;
-    }
-
-
-    @media (max-width: 960px){
-      .hero{grid-template-columns:1fr}
+    @media (max-width: 980px){
+      .page{align-items:flex-start;padding:16px}
+      .main{padding:28px 26px 16px}
+      .hero{grid-template-columns:1fr;gap:28px}
+      h1{font-size:3.4rem;max-width:none}
+      .hero-visual{min-height:430px}
       .cta-row{grid-template-columns:repeat(2,1fr)}
-      .accountability{grid-template-columns:repeat(2,1fr)}
-      .vision-grid{grid-template-columns:repeat(2,1fr)}
-      .bottom-band{grid-template-columns:1fr}
-      .quote-card{grid-template-columns:1fr}
-      .quote-left{justify-content:center;padding:22px 18px 0}
-      .quote-left img{width:210px;height:210px}
-      .quote-right{padding:12px 18px 24px}
     }
     @media (max-width: 640px){
-      .hero{
-        gap:22px;
-      }
+      .page{padding:0;background:#071722}
+      .shell{border-radius:0;border-left:0;border-right:0;min-height:100vh}
+      .nav{min-height:66px;padding:0 16px}
+      .brand img{height:32px}
+      .btn{padding:11px 13px;font-size:.82rem}
+      .main{padding:26px 18px 12px}
+      h1{font-size:2.65rem;line-height:.96;text-align:left}
+      .hero-copy p{font-size:.95rem;line-height:1.6}
       .hero-visual{
         min-height:auto;
-        padding:18px 14px 14px;
+        padding:14px;
         display:flex;
         flex-direction:column;
         align-items:center;
-        justify-content:flex-start;
+        gap:14px;
       }
-      .hero-visual .bg{
-        display:none;
-      }
+      .hero-visual .bg{display:none}
       .hero-visual .mark{
         position:relative;
-        left:auto;
         top:auto;
+        left:auto;
         transform:none;
         width:100%;
         max-width:420px;
-        margin:0 auto;
       }
-      .hero-visual .cubes{
-        display:none;
-      }
+      .hero-visual .cubes{display:none}
       .hero-overlay-card{
         position:relative;
         right:auto;
-        left:auto;
         bottom:auto;
         width:100%;
-        max-width:none;
-        margin:16px 0 0;
-        padding:18px;
-      }
-      .hero-overlay-title{
-        font-size:13px;
-        margin-bottom:10px;
-      }
-      .hero-overlay-card p{
-        font-size:15px;
-        line-height:1.55;
-      }
-
-      .hero-overlay-card{
-        right:14px;
-        left:14px;
-        width:auto;
-        bottom:14px;
         padding:16px;
       }
-
-      .container{padding:0 14px}
-      .brand img{height:34px}
-      .btn{padding:11px 14px;font-size:.86rem}
-      h1{font-size:2.9rem;max-width:none}
-      .hero-copy p{max-width:none}
-      .hero-visual{min-height:380px}
-      .hero-visual .mark{width:62%;max-width:250px}
-      .hero-visual .cubes{width:104px;left:18px;bottom:16px}
-      .cta-row{grid-template-columns:1fr}
-      .accountability,.vision-grid{grid-template-columns:1fr}
+      .hero-overlay-title{font-size:12px}
+      .hero-overlay-card p{font-size:13px}
+      .cta-row{grid-template-columns:1fr;margin-top:18px}
+      .cta-card{min-height:auto;border-right:none;border-bottom:1px solid rgba(255,255,255,.12)}
+      .cta-card:last-child{border-bottom:none}
       .form-row{grid-template-columns:1fr}
-      .bottom-left{flex-direction:column}
-      .bottom-left .cubes{width:94px}
     }
   </style>
 </head>
 <body>
-  <div class="topbar">
-    <div class="container nav">
-      <a class="brand" href="#"><img src="frame-logo.png" alt="Frame logo"></a>
-      <a class="btn" href="https://frame.community/discord" target="_blank" rel="noopener noreferrer">JOIN THE COMMUNITY</a>
+  <div class="page">
+    <div class="shell">
+      <header class="nav">
+        <a class="brand" href="#"><img src="frame-logo.png" alt="Frame logo"></a>
+        <a class="btn" href="https://frame.community/discord" target="_blank" rel="noopener noreferrer">JOIN THE COMMUNITY</a>
+      </header>
+
+      <main class="main">
+        <section class="hero">
+          <div class="hero-copy">
+            <h1>PUBLIC COMPANY STANDARDS <span class="accent">MEET BLOCKCHAIN</span></h1>
+            <p>Frame is part of The Crypto Company, a public company held to the highest standards of transparency and accountability.</p>
+            <p class="secondary">No VC unlocks. No insider dumps. No rugs. Just a fair launch and a long-term vision aligned with the community.</p>
+          </div>
+
+          <div class="hero-visual" aria-label="Frame blockchain graphic">
+            <img class="bg" src="hero-grid-bg.svg" alt="">
+            <img class="mark" src="hero.png" alt="Frame blockchain graphic">
+            <img class="cubes" src="cube-cluster.svg" alt="">
+            <div class="hero-overlay-card">
+              <div class="hero-overlay-title">Built for Accountability</div>
+              <p>Frame is subject to the kind of scrutiny most crypto projects actively avoid.</p>
+              <p>Accountable, unified, and accessible. Ready for scale on day one.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="cta-row" id="community">
+          <div class="cta-card primary">
+            <div>
+              <h3>BE THE FIRST TO KNOW ABOUT LAUNCH</h3>
+              <p>Join the community, get updates, and help shape what's next.</p>
+            </div>
+          </div>
+
+          <a class="cta-card" href="https://frame.community/discord" target="_blank" rel="noopener noreferrer">
+            <div class="mini-icon"><img src="icon-discord.svg" alt="Discord"></div>
+            <div><h3>JOIN DISCORD</h3><p>Discuss with the community</p></div>
+          </a>
+
+          <a class="cta-card" href="https://www.frame.community/" target="_blank" rel="noopener noreferrer">
+            <div class="mini-icon"><img src="icon-telegram.svg" alt="Telegram"></div>
+            <div><h3>JOIN TELEGRAM</h3><p>Stay up to date in real time</p></div>
+          </a>
+
+          <button class="cta-card" id="openUpdates" type="button">
+            <div class="mini-icon"><img src="icon-email.svg" alt="Email"></div>
+            <div><h3>GET UPDATES</h3><p>Be the first to know launch details</p></div>
+          </button>
+        </section>
+      </main>
+
+      <footer>
+        <img src="frame-logo.png" alt="Frame logo">
+        <div>Frame is an advanced blockchain infrastructure developed by Frame Intelligence, LLC.</div>
+        <div>Built for the AI era. Built to last.</div>
+        <div class="footer-links">
+          <span>© 2025 Frame Intelligence, LLC. All rights reserved.</span>
+          <a href="https://www.frame.community/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+        </div>
+      </footer>
     </div>
   </div>
 
-  <main class="container">
-    <section class="hero">
-      <div class="hero-copy">
-        <h1>PUBLIC COMPANY STANDARDS <span class="accent">MEET BLOCKCHAIN</span></h1>
-        <p>Frame is part of The Crypto Company, a public company held to the highest standards of transparency and accountability.</p>
-        <p>No VC unlocks. No insider dumps. No rugs. Just a fair launch and a long-term vision aligned with the community.</p>
-      </div>
-
-      <div class="hero-visual" aria-hidden="true">
-        <img class="bg" src="hero-grid-bg.svg" alt="">
-        <img class="mark" src="hero.png" alt="Frame blockchain graphic">
-        <div class="hero-overlay-card">
-          <div class="hero-overlay-title">Built for Accountability</div>
-          <p>Frame is subject to the kind of scrutiny most crypto projects actively avoid.</p>
-          <p>Accountable, unified, and accessible. Ready for scale on day one.</p>
-        </div>
-        <img class="cubes" src="cube-cluster.svg" alt="">
-      </div>
-    </section>
-
-    <section class="cta-row" id="community">
-      <div class="cta-card primary">
-        <div>
-          <h3>BE THE FIRST TO KNOW ABOUT LAUNCH</h3>
-          <p>Join the community, get updates, and help shape what's next.</p>
-        </div>
-      </div>
-
-      <a class="cta-card" href="https://www.frame.community/discord" target="_blank" rel="noopener noreferrer">
-        <div class="mini-icon"><img src="icon-discord.svg" alt="Discord"></div>
-        <div><h3>JOIN DISCORD</h3><p>Discuss with the community</p></div>
-      </a>
-
-      <a class="cta-card" href="https://www.frame.community/" target="_blank" rel="noopener noreferrer">
-        <div class="mini-icon"><img src="icon-telegram.svg" alt="Telegram"></div>
-        <div><h3>JOIN TELEGRAM</h3><p>Stay up to date in real time</p></div>
-      </a>
-
-      <button class="cta-card" id="openUpdates" type="button" style="background:none;border:none;text-align:left;cursor:pointer">
-        <div class="mini-icon"><img src="icon-email.svg" alt="Email"></div>
-        <div><h3>GET UPDATES</h3><p>Be the first to know launch details</p></div>
-      </button>
-    </section>
-
-    <section>
-      <h2 class="section-title">ACCOUNTABILITY BY DESIGN</h2>
-      <p class="section-sub">We're building more than a blockchain. We're building trust.</p>
-
-      <div class="accountability">
-        <div class="feature">
-          <div class="icon-wrap"><img src="icon-shield-check.svg" alt=""></div>
-          <h3>PUBLIC COMPANY STANDARDS</h3>
-          <p>Backed by The Crypto Company (TCC), a publicly traded company with real-world oversight and accountability.</p>
-        </div>
-
-        <div class="feature">
-          <div class="icon-wrap"><img src="icon-community.svg" alt=""></div>
-          <h3>NO VC CAPITAL. NO BACKROOM DEALS.</h3>
-          <p>No venture capital. No private allocations. No insider advantages. A truly fair launch for everyone.</p>
-        </div>
-
-        <div class="feature">
-          <div class="icon-wrap"><img src="icon-lock.svg" alt=""></div>
-          <h3>NO RUGS. NO SHORT-TERM PLAYS.</h3>
-          <p>TCC is in it for the long haul. Our incentives are aligned with the community and the ecosystem we build together.</p>
-        </div>
-
-        <div class="feature">
-          <div class="icon-wrap"><img src="icon-eye.svg" alt=""></div>
-          <h3>TRANSPARENT BY DEFAULT</h3>
-          <p>Open communication, clear intentions, and a commitment to radical transparency.</p>
-        </div>
-
-        <div class="feature">
-          <div class="icon-wrap"><img src="icon-chip.svg" alt=""></div>
-          <h3>BUILT FOR THE AI ERA</h3>
-          <p>Designed to power the next generation of decentralized applications, AI agents, and real-world utility.</p>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="quote-card">
-        <div class="quote-left">
-          <img src="ron-levy.png" alt="Ron Levy">
-        </div>
-        <div class="quote-right">
-          <div class="quote-mark">“</div>
-          <blockquote>TCC as a public company is in it for the long haul. We don't want to launch this and dump a bunch of tokens on the token holders.</blockquote>
-          <div class="byline">— RON LEVY</div>
-          <div class="role">Chairman &amp; CEO</div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h2 class="section-title">THE FRAME VISION</h2>
-      <p class="section-sub">An advanced blockchain infrastructure for a decentralized future.</p>
-
-      <div class="vision-grid">
-        <div class="vision-card">
-          <div class="icon-wrap"><img src="icon-performance.svg" alt=""></div>
-          <h3>HIGH PERFORMANCE</h3>
-          <p>Low fees. Fast finality. Built for the real-world scale.</p>
-        </div>
-
-        <div class="vision-card">
-          <div class="icon-wrap"><img src="icon-multichain.svg" alt=""></div>
-          <h3>MULTICHAIN FUTURE</h3>
-          <p>Interoperable by design. Built to connect ecosystems.</p>
-        </div>
-
-        <div class="vision-card">
-          <div class="icon-wrap"><img src="icon-chip.svg" alt=""></div>
-          <h3>AI-NATIVE INFRASTRUCTURE</h3>
-          <p>Purpose-built to support AI agents, data integrity, and intelligent applications.</p>
-        </div>
-
-        <div class="vision-card">
-          <div class="icon-wrap"><img src="icon-shield-check.svg" alt=""></div>
-          <h3>COMMUNITY AT THE CORE</h3>
-          <p>A community-first ecosystem where builders, users, and contributors shape the future.</p>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="bottom-band">
-        <div class="bottom-left">
-          <img class="cubes" src="cube-cluster.svg" alt="">
-          <div>
-            <h3>EARLY ACCESS. REAL IMPACT. <span class="accent">JOIN FRAME TODAY.</span></h3>
-            <p>Help shape the future of a publicly accountable blockchain. Join the conversation, stay informed, and be part of something built to last.</p>
-          </div>
-        </div>
-
-        <div class="bottom-links">
-          <a class="bottom-link" href="https://www.frame.community/discord" target="_blank" rel="noopener noreferrer">
-            <div><strong>JOIN DISCORD</strong><span>Discuss with the community</span></div>
-            <div class="arrow">›</div>
-          </a>
-
-          <a class="bottom-link" href="https://www.frame.community/" target="_blank" rel="noopener noreferrer">
-            <div><strong>JOIN TELEGRAM</strong><span>Stay up to date in real time</span></div>
-            <div class="arrow">›</div>
-          </a>
-
-          <button class="bottom-link" id="openUpdates2" type="button" style="background:none;cursor:pointer">
-            <div><strong>GET UPDATES</strong><span>Be the first to know launch details</span></div>
-            <div class="arrow">›</div>
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      <img src="frame-logo.png" alt="Frame logo">
-      <div class="copy">Frame is an advanced blockchain infrastructure developed by The Crypto Company (TCC).<br>Built for the AI era. Built to last.</div>
-      <div class="copy" style="margin-top:6px;">© 2025 The Crypto Company. All rights reserved.</div>
-    </footer>
-  </main>
-
   <div class="modal-backdrop" id="modal">
     <div class="modal">
-      <button class="close" id="closeModal">×</button>
+      <button class="close" id="closeModal" aria-label="Close">×</button>
       <h3>Stay Informed</h3>
       <p>Get launch updates, major announcements, team updates, and ecosystem milestones from Frame.</p>
       <form id="updatesForm">
@@ -672,18 +440,15 @@
 
   <script>
     const modal = document.getElementById('modal');
-    const openers = [document.getElementById('openUpdates'), document.getElementById('openUpdates2')];
+    const openUpdates = document.getElementById('openUpdates');
     const closeModal = document.getElementById('closeModal');
     const privacyCheck = document.getElementById('privacyCheck');
     const submitBtn = document.getElementById('submitBtn');
     const form = document.getElementById('updatesForm');
 
-    const open = () => modal.classList.add('open');
-    const close = () => modal.classList.remove('open');
-
-    openers.forEach(el => el && el.addEventListener('click', open));
-    closeModal.addEventListener('click', close);
-    modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
+    openUpdates.addEventListener('click', () => modal.classList.add('open'));
+    closeModal.addEventListener('click', () => modal.classList.remove('open'));
+    modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('open'); });
 
     privacyCheck.addEventListener('change', () => {
       submitBtn.disabled = !privacyCheck.checked;
@@ -696,7 +461,7 @@
       form.reset();
       submitBtn.disabled = true;
       submitBtn.classList.remove('enabled');
-      close();
+      modal.classList.remove('open');
     });
   </script>
 </body>
