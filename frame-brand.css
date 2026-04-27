@@ -6,9 +6,9 @@
   --frame-border: rgba(255,255,255,.12);
   --frame-text: #f3f8fc;
   --frame-text-muted: rgba(255,255,255,.78);
-  --frame-accent: #11d7ea;
-  --frame-accent-2: #19cfe0;
-  --frame-glow: 0 0 28px rgba(17,215,234,.16);
+--frame-accent: #20c3ca;
+--frame-accent-2: #20c3ca;
+--frame-glow: 0 0 28px rgba(32,195,202,.16);
   --frame-radius-sm: 12px;
   --frame-radius-md: 18px;
   --frame-radius-lg: 24px;
