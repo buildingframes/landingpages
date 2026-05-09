@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#080B0F">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Frame: Use multiple networks. Simply.</title>
+<meta name="description" content="Infrastructure for a more connected ecosystem. Frame is building infrastructure focused on simplifying how networks work together.">
+<meta property="og:title" content="Frame: Use multiple networks. Simply.">
+<meta property="og:description" content="Infrastructure for a more connected ecosystem.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Frame: Use multiple networks. Simply.">
+<meta name="twitter:description" content="Infrastructure for a more connected ecosystem.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XZVD6XEV0H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XZVD6XEV0H');
+</script>
+
+<!-- X Ads Pixel -->
+<script>
+  !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+  twq('config','rc5cl');
+</script>
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --cyan: #20C3CA;
+  --cyan-dim: rgba(32,195,202,0.10);
+  --cyan-glow: rgba(32,195,202,0.30);
+  --bg: #080B0F;
+  --bg-2: #0C1018;
+  --bg-card: rgba(255,255,255,0.03);
+  --border: rgba(255,255,255,0.07);
+  --border-cyan: rgba(32,195,202,0.22);
+  --text-primary: #F0F4F8;
+  --text-secondary: #8B9BAD;
+  --text-muted: #4A5568;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(28px, 5vw, 64px);
+  height: 64px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(8,11,15,0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  gap: 12px;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  height: 36px;
+  flex-shrink: 0;
+  max-width: 160px;
+}
+
+.nav-logo svg {
+  height: 24px;
+  width: auto;
+  max-width: 100%;
+}
+
+.nav-logo { display:flex; align-items:center; text-decoration:none; height:36px; }
+.nav-cta-short { display: none; }
+.nav-cta-full { display: inline; }
+
+.nav-actions { display:flex; gap:8px; align-items:center; flex-shrink:0; }
+
+.nav-link {
+  font-size: 13px; font-weight: 500;
+  color: var(--text-secondary);
+  background: none; border: none; cursor: pointer;
+  padding: 8px 14px; border-radius: 6px;
+  text-decoration: none; transition: color 0.2s;
+}
+.nav-link:hover { color: var(--text-primary); }
+
+.btn-primary {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px; font-weight: 600;
+  color: #080B0F; background: var(--cyan);
+  border: none; cursor: pointer;
+  padding: 9px 20px; border-radius: 6px;
+  text-decoration: none;
+  transition: opacity 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
+}
+.btn-primary:hover { opacity: 0.88; box-shadow: 0 0 24px var(--cyan-glow); }
+
+/* HERO */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 100px clamp(28px, 5vw, 64px) 60px;
+  text-align: center; overflow: hidden;
+}
+
+.hero-canvas { position:absolute; inset:0; width:100%; height:100%; z-index:0; opacity:0.55; }
+
+.hero::after {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(ellipse 70% 50% at 50% 40%, rgba(32,195,202,0.05) 0%, transparent 70%),
+              radial-gradient(ellipse 100% 30% at 50% 100%, rgba(8,11,15,1) 0%, transparent 70%);
+  z-index:1; pointer-events:none;
+}
+
+.hero-content { position:relative; z-index:2; max-width:720px; text-align:center; width:100%; }
+
+.hero-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  border:1px solid var(--border-cyan); background:var(--cyan-dim);
+  border-radius:100px; padding:5px 14px;
+  font-size:11px; font-weight:500; color:var(--cyan);
+  letter-spacing:0.1em; text-transform:uppercase;
+  margin-bottom:32px; animation:fadein 0.7s ease both;
+}
+
+.badge-dot {
+  width:5px; height:5px; background:var(--cyan); border-radius:50%;
+  animation:pulsedot 2.2s ease-in-out infinite;
+}
+
+@keyframes pulsedot { 0%,100%{opacity:1;} 50%{opacity:0.35;} }
+@keyframes fadein { from{opacity:0;transform:translateY(14px);} to{opacity:1;transform:translateY(0);} }
+
+.hero h1 {
+  font-family:'Chakra Petch',sans-serif;
+  font-size:clamp(38px,6.5vw,76px); font-weight:600;
+  line-height:1.1; letter-spacing:-0.025em;
+  color:var(--text-primary); margin-bottom:22px;
+  animation:fadein 0.7s 0.08s ease both;
+}
+.hero h1 em { font-style:normal; color:var(--cyan); }
+
+.hero-sub {
+  font-size:clamp(15px,1.8vw,19px); color:var(--text-secondary);
+  font-weight:400; max-width:500px; margin:0 auto 40px;
+  line-height:1.7; animation:fadein 0.7s 0.16s ease both;
+}
+
+.hero-actions {
+  display:flex; gap:12px; justify-content:center;
+  flex-wrap:wrap; animation:fadein 0.7s 0.24s ease both; margin-bottom:16px;
+}
+
+.btn-outline {
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:'Inter',sans-serif; font-size:14px; font-weight:500;
+  padding:11px 22px; border-radius:8px; text-decoration:none; cursor:pointer;
+  border:1px solid var(--border); color:var(--text-secondary); background:var(--bg-card);
+  transition:all 0.2s;
+}
+.btn-outline:hover { border-color:rgba(255,255,255,0.15); color:var(--text-primary); }
+
+.hero-learn {
+  position:absolute; bottom:32px; left:50%; transform:translateX(-50%);
+  z-index:2; display:flex; flex-direction:column; align-items:center; gap:6px;
+  text-decoration:none; animation:fadein 1s 0.6s ease both;
+}
+.hero-learn span { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); }
+.hero-learn-arrow {
+  width:28px; height:28px; border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; color:var(--text-muted);
+  animation:bounce 2s ease-in-out infinite;
+}
+@keyframes bounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(5px);} }
+
+/* SHARED */
+.section {
+  position:relative;
+  padding:clamp(72px,9vw,128px) clamp(28px,5vw,64px);
+  z-index:1;
+}
+.section-inner { max-width:1080px; margin:0 auto; }
+
+.divider {
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--border) 30%,var(--border) 70%,transparent);
+  position:relative; z-index:1;
+}
+
+.eyebrow {
+  font-family:'Chakra Petch',sans-serif;
+  font-size:11px; font-weight:600; letter-spacing:0.14em;
+  text-transform:uppercase; color:var(--cyan); margin-bottom:14px;
+}
+
+.section-h2 {
+  font-family:'Chakra Petch',sans-serif;
+  font-size:clamp(26px,3.8vw,46px); font-weight:600;
+  line-height:1.15; letter-spacing:-0.02em;
+  color:var(--text-primary); margin-bottom:18px;
+}
+
+/* PULL QUOTE */
+.pull-quote {
+  border-left:2px solid var(--cyan);
+  padding:4px 0 4px 24px; margin:44px 0 36px;
+}
+.pull-quote p {
+  font-family:'Chakra Petch',sans-serif;
+  font-size:clamp(18px,2.5vw,27px); font-weight:400;
+  color:var(--text-primary); line-height:1.45; letter-spacing:-0.01em;
+}
+
+/* NARRATIVE */
+.narrative { max-width:660px; }
+.narrative p { font-size:clamp(17px,1.5vw,18px); color:var(--text-secondary); line-height:1.85; margin-bottom:22px; }
+.narrative p:last-child { margin-bottom:0; }
+.narrative strong { color:var(--text-primary); font-weight:500; }
+
+/* TWO COL */
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:clamp(40px,7vw,96px); align-items:start; }
+.two-col-sticky { position:sticky; top:96px; }
+
+/* PROBLEM CARDS */
+.problem-stack { display:flex; flex-direction:column; gap:14px; margin-top:44px; }
+
+.problem-card {
+  border:1px solid var(--border); border-radius:12px;
+  background:var(--bg-card); padding:26px 26px 26px 22px;
+  display:flex; gap:18px; align-items:flex-start;
+  transition:border-color 0.3s,background 0.3s;
+  position:relative; overflow:hidden;
+}
+.problem-card::before {
+  content:''; position:absolute; left:0; top:0; bottom:0; width:2px;
+  background:var(--cyan); border-radius:0 2px 2px 0;
+  opacity:0; transition:opacity 0.3s;
+}
+.problem-card:hover { border-color:var(--border-cyan); background:rgba(32,195,202,0.025); }
+.problem-card:hover::before { opacity:1; }
+
+.problem-num {
+  font-family:'Chakra Petch',sans-serif; font-size:11px; font-weight:600;
+  letter-spacing:0.08em; color:var(--cyan); opacity:0.6; min-width:22px; margin-top:2px;
+}
+.problem-card h3 {
+  font-family:'Chakra Petch',sans-serif; font-size:15px; font-weight:500;
+  color:var(--text-primary); margin-bottom:5px; line-height:1.3;
+}
+.problem-card p { font-size:14px; color:var(--text-secondary); line-height:1.7; }
+
+/* NETWORK VISUAL */
+.net-visual {
+  border:1px solid var(--border); border-radius:16px;
+  background:var(--bg-2); overflow:hidden; height:360px;
+  position:relative; display:flex; align-items:flex-end;
+  justify-content:center; padding-bottom:20px;
+}
+.net-visual canvas { position:absolute; inset:0; width:100%; height:100%; }
+.net-visual-label {
+  position:relative; z-index:2; font-size:11px; letter-spacing:0.1em;
+  text-transform:uppercase; color:var(--text-muted); font-family:'Chakra Petch',sans-serif;
+}
+
+.net-visual-static {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 28px;
+  padding: 28px 20px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--bg-2);
+}
+
+/* FEATURE ROWS */
+.feature-rows { display:flex; flex-direction:column; margin-top:44px; }
+.feature-row {
+  display:flex; gap:22px; align-items:flex-start;
+  padding:26px 0; border-bottom:1px solid var(--border); transition:all 0.2s;
+}
+.feature-row:first-child { border-top:1px solid var(--border); }
+
+.feature-icon {
+  width:42px; height:42px; flex-shrink:0; border-radius:10px;
+  border:1px solid var(--border-cyan); background:var(--cyan-dim);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--cyan); margin-top:2px; transition:box-shadow 0.2s;
+}
+.feature-row:hover .feature-icon { box-shadow:0 0 16px var(--cyan-glow); }
+
+.feature-row h4 {
+  font-family:'Chakra Petch',sans-serif; font-size:15px; font-weight:500;
+  color:var(--text-primary); margin-bottom:5px;
+}
+.feature-row p { font-size:14px; color:var(--text-secondary); line-height:1.7; }
+
+/* ORBIT VISUAL */
+.orbit-visual {
+  border:1px solid var(--border); border-radius:16px;
+  background:var(--bg-2); overflow:hidden; aspect-ratio:1;
+  position:relative;
+}
+.orbit-visual canvas { position:absolute; inset:0; width:100%; height:100%; }
+
+/* INLINE CTA STRIP */
+.inline-cta {
+  background:linear-gradient(135deg,rgba(32,195,202,0.06) 0%,transparent 60%);
+  border:1px solid var(--border-cyan); border-radius:14px;
+  padding:30px 36px; display:flex; align-items:center;
+  justify-content:space-between; gap:24px; flex-wrap:wrap; margin-top:64px;
+}
+.inline-cta-title {
+  font-family:'Chakra Petch',sans-serif; font-size:17px; font-weight:500;
+  color:var(--text-primary); margin-bottom:4px;
+}
+.inline-cta-sub { font-size:13px; color:var(--text-secondary); }
+.inline-cta-btns { display:flex; gap:10px; flex-wrap:wrap; flex-shrink:0; }
+
+/* COMMUNITY BUTTONS */
+.btn-community {
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:'Inter',sans-serif; font-size:14px; font-weight:500;
+  padding:11px 22px; border-radius:8px; text-decoration:none; cursor:pointer;
+  border:none; transition:all 0.2s;
+}
+.btn-discord { background:rgba(88,101,242,0.14); border:1px solid rgba(88,101,242,0.28); color:#8B9CF4; }
+.btn-discord:hover { background:rgba(88,101,242,0.24); border-color:rgba(88,101,242,0.5); color:#A8B4F8; }
+.btn-telegram { background:rgba(39,174,234,0.1); border:1px solid rgba(39,174,234,0.22); color:#5BC8F5; }
+.btn-telegram:hover { background:rgba(39,174,234,0.2); border-color:rgba(39,174,234,0.4); color:#7DD6F8; }
+
+/* PRINCIPLES */
+.principles {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:0; margin-top:56px;
+  border:1px solid var(--border); border-radius:16px; overflow:hidden;
+}
+.principle {
+  background:var(--bg-card); padding:36px 30px;
+  border-right:1px solid var(--border); border-bottom:1px solid var(--border);
+  transition:background 0.3s;
+}
+.principle:hover { background:rgba(32,195,202,0.03); }
+.principle-n {
+  font-family:'Chakra Petch',sans-serif; font-size:40px; font-weight:700;
+  color:var(--cyan); opacity:0.15; line-height:1; margin-bottom:16px;
+}
+.principle h4 {
+  font-family:'Chakra Petch',sans-serif; font-size:15px; font-weight:500;
+  color:var(--text-primary); margin-bottom:8px;
+}
+.principle p { font-size:13px; color:var(--text-secondary); line-height:1.75; }
+
+/* EMAIL FORM */
+.email-form {
+  display:flex; max-width:440px; width:100%; border-radius:8px;
+  overflow:hidden; border:1px solid var(--border);
+  background:rgba(255,255,255,0.04); transition:border-color 0.2s,box-shadow 0.2s;
+}
+.email-form:focus-within {
+  border-color:var(--border-cyan); box-shadow:0 0 0 3px rgba(32,195,202,0.07);
+}
+.email-input {
+  flex:1; background:none; border:none; outline:none;
+  padding:13px 16px; font-family:'Inter',sans-serif; font-size:14px;
+  color:var(--text-primary); min-width:0;
+}
+.email-input::placeholder { color:var(--text-muted); }
+.email-submit {
+  background:var(--cyan); border:none; color:#080B0F;
+  font-family:'Inter',sans-serif; font-size:13px; font-weight:600;
+  padding:13px 20px; cursor:pointer; transition:opacity 0.2s; white-space:nowrap;
+}
+.email-submit:hover { opacity:0.88; }
+.email-success { display:none; align-items:center; gap:8px; color:var(--cyan); font-size:14px; font-weight:500; }
+.email-success.show { display:flex; }
+
+/* FINAL CTA */
+.final-cta {
+  text-align:center;
+  padding:clamp(80px,10vw,140px) clamp(28px,5vw,64px);
+  position:relative; z-index:1;
+}
+.final-cta-box { max-width:680px; margin:0 auto; position:relative; }
+.final-cta-glow {
+  position:absolute; top:-80px; left:50%; transform:translateX(-50%);
+  width:500px; height:500px;
+  background:radial-gradient(ellipse,rgba(32,195,202,0.07) 0%,transparent 65%);
+  pointer-events:none;
+}
+.final-cta h2 {
+  font-family:'Chakra Petch',sans-serif;
+  font-size:clamp(30px,4.5vw,54px); font-weight:600;
+  line-height:1.1; letter-spacing:-0.02em; margin-bottom:18px; position:relative;
+}
+.final-cta-body {
+  font-size:16px; color:var(--text-secondary);
+  max-width:460px; margin:0 auto 40px; line-height:1.75; position:relative;
+}
+.final-cta-btns {
+  display:flex; gap:12px; justify-content:center;
+  flex-wrap:wrap; margin-bottom:28px; position:relative;
+}
+.final-email { display:flex; justify-content:center; position:relative; }
+
+/* FOOTER */
+footer {
+  border-top:1px solid var(--border);
+  padding:36px clamp(28px,5vw,64px);
+  display:flex; align-items:center; justify-content:space-between;
+  flex-wrap:wrap; gap:20px; position:relative; z-index:1;
+}
+.footer-links { display:flex; gap:24px; flex-wrap:wrap; }
+.footer-links a { font-size:13px; color:var(--text-muted); text-decoration:none; transition:color 0.2s; }
+.footer-links a:hover { color:var(--text-secondary); }
+.footer-copy { font-size:12px; color:var(--text-muted); }
+
+/* MOBILE STICKY */
+.mobile-sticky {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 99;
+  background: rgba(8,11,15,0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border);
+  padding: 12px 16px;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  gap: 8px;
+  box-sizing: border-box;
+}
+
+.sticky-btn {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+
+.sticky-btn.btn-discord {
+  background: rgba(88,101,242,0.14);
+  border: 1px solid rgba(88,101,242,0.28);
+  color: #8B9CF4;
+}
+
+.sticky-btn.btn-primary-solid {
+  background: var(--cyan);
+  color: #080B0F;
+  border: none;
+}
+
+/* ── SOCIAL PROOF BAR ── */
+.social-bar {
+  position: relative;
+  z-index: 1;
+  background: rgba(32,195,202,0.03);
+  border-bottom: 1px solid var(--border);
+}
+.social-bar-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 18px clamp(28px,5vw,64px);
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+}
+.social-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 0 32px;
+  flex: 1;
+  min-width: 140px;
+}
+.social-stat:first-child { padding-left: 0; }
+.social-stat-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-family: 'Chakra Petch', sans-serif;
+}
+.social-stat-value {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+.social-divider {
+  width: 1px;
+  height: 32px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+/* ── WHY NOW STATS ── */
+.why-now-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.stat-card {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-card);
+  transition: border-color 0.3s;
+}
+.stat-card:hover { border-color: var(--border-cyan); }
+.stat-icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  border: 1px solid var(--border-cyan);
+  background: var(--cyan-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cyan);
+}
+.stat-label {
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+.stat-body {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ── EMAIL BENEFITS ── */
+.email-benefits {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+.email-benefits span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.email-benefits svg { color: var(--cyan); flex-shrink: 0; }
+
+
+.privacy-consent {
+  max-width: 440px;
+  margin: 12px auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  user-select: none;
+}
+.privacy-consent input {
+  width: 15px;
+  height: 15px;
+  accent-color: var(--cyan);
+  flex-shrink: 0;
+}
+.privacy-consent a {
+  color: var(--cyan);
+  text-decoration: none;
+  font-weight: 600;
+}
+.privacy-consent a:hover { text-decoration: underline; }
+
+/* ── MOBILE overrides for new sections ── */
+@media(max-width:640px) {
+  .social-bar-inner { gap: 12px; padding: 14px 24px; }
+  .social-stat { min-width: calc(50% - 12px); padding: 0; }
+  .social-divider { display: none; }
+  .why-now-stats { margin-top: 32px; }
+  .stat-card { padding: 16px; }
+  .email-benefits { gap: 12px; }
+  .email-benefits span { font-size: 11px; }
+}
+.reveal { opacity:0; transform:translateY(22px); transition:opacity 0.65s ease,transform 0.65s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* On mobile — skip the animation entirely, just show everything */
+@media(max-width:640px){
+  .reveal { opacity:1; transform:none; transition:none; }
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .two-col { grid-template-columns: 1fr; }
+  .two-col-sticky { position: static; }
+  .orbit-visual { aspect-ratio: 16/9; max-height: 220px; }
+  .net-visual { height: 260px; }
+}
+
+/* ── MOBILE (≤640px) — primary target ── */
+@media(max-width:640px){
+
+  /* Base: ensure everything is centered with equal breathing room */
+  body { padding-bottom: calc(76px + env(safe-area-inset-bottom)); }
+
+  /* Nav */
+  nav { height: 56px; padding: 0 20px; gap: 8px; }
+  .nav-logo { max-width: 120px; }
+  .nav-logo svg { height: 20px; }
+  .nav-actions .nav-link { display: none; }
+  .nav-cta-btn { display: none; }
+
+  /* Sticky bar */
+  .mobile-sticky { display: flex; }
+
+  /* Hero — tighter, punchier on small screen */
+  .hero {
+    min-height: unset;
+    height: auto;
+    padding: 100px 28px 60px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .hero-content {
+    max-width: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .hero-learn { position: relative; bottom: unset; left: unset; transform: none; margin-top: 36px; }
+  .hero-canvas { opacity: 0.45; }
+  .hero-content { max-width: 100%; width: 100%; }
+  .hero-badge { font-size: 10px; padding: 5px 12px; margin-bottom: 20px; }
+  .hero h1 { font-size: clamp(32px, 8.5vw, 46px); margin-bottom: 14px; line-height: 1.15; }
+  .hero-sub {
+    font-size: 15px;
+    line-height: 1.65;
+    margin-bottom: 28px;
+    max-width: 100%;
+  }
+  .hero-actions { flex-direction: column; gap: 10px; width: 100%; margin-bottom: 0; }
+  .hero-actions .btn-primary {
+    width: 100%;
+    text-align: center;
+    padding: 13px 24px;
+    font-size: 15px;
+    border-radius: 10px;
+    max-width: none;
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+  }
+  .hero-actions .btn-outline {
+    width: 100%;
+    justify-content: center;
+    padding: 11px 24px;
+    font-size: 14px;
+    border-radius: 10px;
+  }
+
+  /* Sections — generous equal padding on both sides */
+  .section { padding: 48px 24px; }
+  .section-inner { width: 100%; }
+  .section-h2 { font-size: clamp(26px, 7vw, 34px); line-height: 1.2; margin-bottom: 16px; }
+  .eyebrow { font-size: 11px; margin-bottom: 10px; }
+
+  /* Pull quote — bigger and more dramatic */
+  .pull-quote { margin: 28px 0 24px; padding-left: 16px; }
+  .pull-quote p { font-size: clamp(19px, 5.5vw, 26px); line-height: 1.4; }
+
+  /* Narrative — much more readable */
+  .narrative { max-width: 100%; }
+  .narrative p { font-size: 17px; line-height: 1.85; margin-bottom: 20px; }
+
+  /* Problem cards */
+  .problem-stack { gap: 12px; margin-top: 28px; }
+  .problem-card { padding: 22px 18px; gap: 14px; border-radius: 10px; }
+  .problem-num { font-size: 11px; }
+  .problem-card h3 { font-size: 16px; margin-bottom: 6px; }
+  .problem-card p { font-size: 15px; line-height: 1.65; }
+
+  /* Network visual — hide canvas, show static SVG on mobile */
+  .net-visual { display: none; }
+  .net-visual-static { display: flex; }
+
+  /* Orbit — hide on mobile */
+  .orbit-visual { display: none; }
+
+  /* Inline CTA strip */
+  .inline-cta {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 22px 18px;
+    margin-top: 36px;
+    gap: 14px;
+    border-radius: 12px;
+  }
+  .inline-cta-title { font-size: 16px; }
+  .inline-cta-sub { font-size: 14px; }
+  .inline-cta-btns { width: 100%; flex-direction: column; gap: 8px; }
+  .inline-cta-btns .btn-community {
+    width: 100%;
+    justify-content: center;
+    padding: 13px 20px;
+    font-size: 15px;
+  }
+  .feature-rows { margin-top: 28px; }
+  .feature-row { padding: 20px 0; gap: 16px; }
+  .feature-icon { width: 38px; height: 38px; flex-shrink: 0; }
+  .feature-row h4 { font-size: 16px; margin-bottom: 5px; }
+  .feature-row p { font-size: 15px; line-height: 1.65; }
+
+  /* Principles */
+  .principles { grid-template-columns: 1fr; margin-top: 28px; }
+  .principle { padding: 26px 20px; }
+  .principle-n { font-size: 32px; margin-bottom: 10px; }
+  .principle h4 { font-size: 16px; margin-bottom: 8px; }
+  .principle p { font-size: 15px; line-height: 1.7; }
+
+  /* Final CTA */
+  .final-cta { padding: 60px 28px; }
+  .final-cta h2 { font-size: clamp(28px, 8vw, 40px); }
+  .final-cta-body { font-size: 15px; margin-bottom: 32px; }
+  .final-cta-btns {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .final-cta-btns .btn-community,
+  .final-cta-btns .btn-primary {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    padding: 14px 20px;
+    font-size: 15px;
+    border-radius: 10px;
+  }
+
+  /* Email form — stacked */
+  .final-email { width: 100%; }
+  .email-form {
+    flex-direction: column;
+    border-radius: 10px;
+    max-width: 100%;
+    overflow: visible;
+    border: none;
+    background: none;
+    gap: 10px;
+  }
+  .email-input {
+    width: 100%;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.04);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 16px;
+  }
+  .email-input:focus {
+    border-color: var(--border-cyan);
+    box-shadow: 0 0 0 3px rgba(32,195,202,0.07);
+    outline: none;
+  }
+  .email-submit {
+    width: 100%;
+    border-radius: 10px;
+    padding: 14px 20px;
+    font-size: 15px;
+  }
+
+  /* Footer */
+  footer {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 28px 28px;
+    gap: 16px;
+  }
+  .footer-links { gap: 20px; }
+  .footer-copy { order: 3; }
+
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#top" class="nav-logo" aria-label="Frame">
+    <svg height="24" viewBox="0 0 2931 1066" xmlns="http://www.w3.org/2000/svg" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;height:24px;width:auto;max-width:140px;display:block;">
+      <g transform="matrix(1,0,0,1,-34.60026,-0)"><g transform="matrix(1,0,0,0.355003,0,0)"><g transform="matrix(47.111312,0,0,132.706771,-81494.639315,-355857.259355)">
+        <path d="M1754.328,2688.67L1760.28,2688.67L1760.28,2690.05L1755.96,2690.05L1755.96,2692.378L1759.704,2692.378L1759.704,2693.758L1755.96,2693.758L1755.96,2697.07L1754.328,2697.07L1754.328,2688.67ZM1767.84,2694.286L1767.84,2697.07L1766.208,2697.07L1766.208,2694.658L1765.488,2693.854L1762.872,2693.854L1762.872,2697.07L1761.24,2697.07L1761.24,2688.67L1766.508,2688.67L1767.792,2689.966L1767.792,2692.51L1766.976,2693.338L1767.84,2694.286ZM1762.872,2692.51L1765.764,2692.51L1766.184,2692.09L1766.184,2690.458L1765.764,2690.038L1762.872,2690.038L1762.872,2692.51ZM1771.692,2688.67L1773.18,2688.67L1776.252,2697.07L1774.596,2697.07L1773.912,2695.21L1770.96,2695.21L1770.276,2697.07L1768.62,2697.07L1771.692,2688.67ZM1773.552,2693.866L1772.436,2690.674L1772.412,2690.674L1771.332,2693.866L1773.552,2693.866ZM1777.092,2688.67L1778.604,2688.67L1781.1,2694.094L1781.124,2694.094L1783.632,2688.67L1785.144,2688.67L1785.144,2697.07L1783.572,2697.07L1783.572,2691.958L1783.548,2691.958L1781.616,2695.894L1780.608,2695.894L1778.676,2691.958L1778.676,2697.07L1777.092,2697.07L1777.092,2688.67ZM1786.704,2688.67L1792.776,2688.67L1792.776,2690.05L1788.336,2690.05L1788.336,2692.174L1792.428,2692.174L1792.428,2693.53L1788.336,2693.53L1788.336,2695.69L1792.776,2695.69L1792.776,2697.07L1786.704,2697.07L1786.704,2688.67ZM1750.53,2688.682L1750.53,2696.859C1750.53,2697.778 1750.051,2698.691 1749.266,2699.17L1741.469,2703.873C1740.536,2704.443 1739.456,2704.064 1739.456,2702.971L1739.457,2697.487C1739.457,2697.426 1739.488,2697.369 1739.541,2697.338L1745.804,2693.53C1745.921,2693.46 1746.069,2693.544 1746.069,2693.681L1746.069,2695.812C1746.069,2695.873 1746.038,2695.93 1745.985,2695.961L1741.795,2698.54C1741.69,2698.603 1741.625,2698.717 1741.625,2698.839L1741.621,2700.626C1741.621,2700.898 1741.918,2701.067 1742.152,2700.926L1747.975,2697.455C1748.185,2697.329 1748.313,2697.102 1748.313,2696.856L1748.313,2688.845C1748.313,2688.586 1748.228,2688.231 1747.998,2688.11L1740.992,2683.861C1740.775,2683.746 1740.456,2683.695 1740.246,2683.822L1733.084,2688.221C1732.874,2688.348 1732.745,2688.517 1732.745,2688.762L1732.745,2696.261C1732.744,2696.814 1733.051,2697.262 1733.54,2697.52L1734.783,2698.248C1734.9,2698.317 1735.047,2698.291 1735.047,2698.156L1735.048,2690.102C1735.048,2689.857 1735.176,2689.63 1735.386,2689.503L1740.438,2686.448C1740.543,2686.385 1740.673,2686.381 1740.782,2686.438L1742.225,2687.315C1742.467,2687.442 1742.535,2687.667 1742.301,2687.808L1737.55,2690.702C1737.34,2690.828 1737.153,2691.056 1737.153,2691.302L1737.212,2701.873C1737.212,2702.077 1736.989,2702.203 1736.814,2702.098L1731.844,2699.103C1731.051,2698.625 1730.566,2697.825 1730.566,2696.899L1730.566,2688.599C1730.566,2687.705 1731.018,2686.872 1731.767,2686.385L1739.149,2681.958C1739.967,2681.425 1741.012,2681.388 1741.867,2681.861L1749.285,2686.372C1750.125,2686.836 1750.53,2687.721 1750.53,2688.682ZM1745.016,2688.954L1745.985,2689.578C1746.038,2689.609 1746.07,2689.666 1746.07,2689.728L1746.07,2690.611C1746.07,2690.673 1746.038,2690.73 1745.985,2690.761L1739.722,2694.568C1739.605,2694.638 1739.456,2694.554 1739.456,2694.418L1739.456,2692.287C1739.456,2692.226 1739.488,2692.169 1739.541,2692.138L1744.834,2688.954C1744.89,2688.92 1744.96,2688.92 1745.016,2688.954Z" style="fill:white;"/>
+      </g></g></g>
+    </svg>
+  </a>
+  <div class="nav-actions">
+    <a href="#problem" class="nav-link">The Problem</a>
+    <a href="#vision" class="nav-link">Vision</a>
+    <a href="#community" class="btn-primary nav-cta-btn" onclick="track('nav_cta')"><span class="nav-cta-full">Follow the launch</span><span class="nav-cta-short">Follow</span></a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <canvas class="hero-canvas" id="heroCanvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-badge"><span class="badge-dot"></span>Multichain. Simplified.</div>
+    <h1>Use multiple networks.<br><em>Simply.</em></h1>
+    <p class="hero-sub">Frame is building infrastructure designed to simplify how blockchain networks work together.</p>
+    <div class="hero-actions">
+      <a href="#community" class="btn-primary" onclick="track('hero_join')">Follow the launch</a>
+      <a href="#problem" class="btn-outline">
+        What is Frame?
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg>
+      </a>
+    </div>
+  </div>
+  <a href="#problem" class="hero-learn" aria-label="Scroll to learn more">
+    <span>Scroll to explore</span>
+    <span class="hero-learn-arrow">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6,9 12,15 18,9"/></svg>
+    </span>
+  </a>
+</section>
+
+
+
+
+<!-- THE PROBLEM -->
+<section class="section" id="problem">
+  <div class="section-inner">
+    <div class="two-col">
+      <div>
+        <p class="eyebrow reveal">The Challenge</p>
+        <h2 class="section-h2 reveal">Multichain is powerful.<br>But it's complicated.</h2>
+
+        <div class="pull-quote reveal">
+          <p>"Using multiple networks shouldn't feel this complicated."</p>
+        </div>
+
+        <div class="narrative reveal">
+          <p>Blockchain technology has made remarkable progress. There are now dozens of active networks, each with their own strengths, communities, and use cases. That diversity is genuinely valuable.</p>
+          <p>But moving between them is still <strong>harder than it should be</strong>. Different wallets, different interfaces, different mental models. Every switch requires context, and that friction adds up.</p>
+          <p>The problem isn't the networks themselves. It's that the infrastructure connecting them hasn't kept pace. Users and developers are left navigating complexity that shouldn't exist at this layer.</p>
+        </div>
+
+        <div class="problem-stack">
+          <div class="problem-card reveal">
+            <span class="problem-num">01</span>
+            <div>
+              <h3>Fragmented experiences</h3>
+              <p>Moving between networks often means starting over: different tools, different flows, unnecessary repetition. The seams show in ways they shouldn't.</p>
+            </div>
+          </div>
+          <div class="problem-card reveal">
+            <span class="problem-num">02</span>
+            <div>
+              <h3>Siloed ecosystems</h3>
+              <p>Networks mostly operate in isolation. The tooling around them reflects this, each ecosystem building independently, rarely for the person navigating across all of them.</p>
+            </div>
+          </div>
+          <div class="problem-card reveal">
+            <span class="problem-num">03</span>
+            <div>
+              <h3>Complexity at the wrong layer</h3>
+              <p>Cross-network complexity shouldn't be the user's problem to solve. Infrastructure should absorb that burden, not pass it on.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="two-col-sticky reveal">
+        <div class="net-visual">
+          <canvas id="networkCanvas"></canvas>
+          <span class="net-visual-label">Connected networks · Simpler experiences</span>
+        </div>
+
+        <!-- Static SVG shown on mobile where canvas doesn't render -->
+        <div class="net-visual-static">
+          <svg width="100%" viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+            <line x1="160" y1="100" x2="70"  y2="38"  stroke="rgba(32,195,202,0.3)" stroke-width="1"/>
+            <line x1="160" y1="100" x2="250" y2="38"  stroke="rgba(32,195,202,0.3)" stroke-width="1"/>
+            <line x1="160" y1="100" x2="30"  y2="130" stroke="rgba(32,195,202,0.22)" stroke-width="1"/>
+            <line x1="160" y1="100" x2="290" y2="130" stroke="rgba(32,195,202,0.22)" stroke-width="1"/>
+            <line x1="160" y1="100" x2="160" y2="178" stroke="rgba(32,195,202,0.18)" stroke-width="1"/>
+            <circle cx="70"  cy="38"  r="6" fill="rgba(32,195,202,0.15)" stroke="#20C3CA" stroke-width="1.2"/>
+            <circle cx="250" cy="38"  r="6" fill="rgba(32,195,202,0.15)" stroke="#20C3CA" stroke-width="1.2"/>
+            <circle cx="30"  cy="130" r="6" fill="rgba(32,195,202,0.15)" stroke="#20C3CA" stroke-width="1.2"/>
+            <circle cx="290" cy="130" r="6" fill="rgba(32,195,202,0.15)" stroke="#20C3CA" stroke-width="1.2"/>
+            <circle cx="160" cy="178" r="6" fill="rgba(32,195,202,0.15)" stroke="#20C3CA" stroke-width="1.2"/>
+            <text x="70"  y="24"  text-anchor="middle" fill="rgba(240,244,248,0.4)" font-size="10" font-family="Inter,sans-serif">Network A</text>
+            <text x="250" y="24"  text-anchor="middle" fill="rgba(240,244,248,0.4)" font-size="10" font-family="Inter,sans-serif">Network B</text>
+            <text x="30"  y="152" text-anchor="middle" fill="rgba(240,244,248,0.4)" font-size="10" font-family="Inter,sans-serif">Network C</text>
+            <text x="290" y="152" text-anchor="middle" fill="rgba(240,244,248,0.4)" font-size="10" font-family="Inter,sans-serif">Network D</text>
+            <text x="160" y="198" text-anchor="middle" fill="rgba(240,244,248,0.4)" font-size="10" font-family="Inter,sans-serif">Network E</text>
+            <circle cx="160" cy="100" r="16" fill="rgba(32,195,202,0.08)" stroke="rgba(32,195,202,0.5)" stroke-width="1.5"/>
+            <circle cx="160" cy="100" r="6"  fill="#20C3CA"/>
+            <text x="160" y="122" text-anchor="middle" fill="rgba(240,244,248,0.4)" font-size="10" font-family="Chakra Petch,sans-serif">Frame</text>
+          </svg>
+          <p style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);font-family:'Chakra Petch',sans-serif;margin-top:8px;">Connected networks · Simpler experiences</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- VISION -->
+<section class="section" id="vision">
+  <div class="section-inner">
+    <div class="two-col">
+      <div class="two-col-sticky reveal">
+        <div class="orbit-visual"><canvas id="orbitCanvas"></canvas></div>
+      </div>
+      <div>
+        <p class="eyebrow reveal">Our Focus</p>
+        <h2 class="section-h2 reveal">A simpler approach to connected blockchain ecosystems.</h2>
+
+        <div class="narrative reveal">
+          <p>Frame is focused on the infrastructure layer, sitting between networks and the people building on them. Not the applications themselves, but the layer that makes them work together.</p>
+          <p>We're building toward a future where <strong>switching between networks feels natural</strong>, where developers don't have to rebuild the same integrations over and over, and where the underlying complexity is something you never have to think about.</p>
+          <p>That's a long-term project. We're approaching it carefully, building infrastructure designed to last.</p>
+        </div>
+
+        <div class="feature-rows">
+          <div class="feature-row reveal">
+            <div class="feature-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+            </div>
+            <div>
+              <h4>Interoperability-first</h4>
+              <p>Focused on the layer that enables networks to communicate more effectively. Not bolted on, but foundational.</p>
+            </div>
+          </div>
+          <div class="feature-row reveal">
+            <div class="feature-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            <div>
+              <h4>Reduced friction by design</h4>
+              <p>Fewer steps, less context switching. A cleaner path from intent to action, across multiple networks.</p>
+            </div>
+          </div>
+          <div class="feature-row reveal">
+            <div class="feature-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12,2 2,7 12,12 22,7"/><polyline points="2,17 12,22 22,17"/><polyline points="2,12 12,17 22,12"/></svg>
+            </div>
+            <div>
+              <h4>Built for connected networks</h4>
+              <p>Clear, composable infrastructure designed for networks that need to work together, without inheriting unnecessary complexity.</p>
+            </div>
+          </div>
+          <div class="feature-row reveal">
+            <div class="feature-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <h4>Long-term thinking</h4>
+              <p>Foundational infrastructure takes time to get right. We're focused on durability, not speed for its own sake.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mid-page inline CTA -->
+    <div class="inline-cta reveal">
+      <div>
+        <a href="#updates" class="inline-cta-title" style="text-decoration:none;color:inherit;">Follow the ecosystem from the beginning. <span style="color:var(--cyan);font-size:14px;">Follow development &darr;</span></a>
+        <p class="inline-cta-sub">A growing community interested in the future of multichain infrastructure.</p>
+      </div>
+      <div class="inline-cta-btns">
+        <a href="https://www.frame.community/framead-discord?utm_source=x&utm_medium=paid_social&utm_campaign=connect_ecosystem&utm_content=discord_join&utm_term=use_multiple_networks" class="btn-community btn-discord" onclick="track('mid_discord')" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.032.056a19.9 19.9 0 0 0 5.993 3.03.077.077 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+          Join Discord
+        </a>
+        <a href="https://www.frame.community/framead-telegram?utm_source=x&utm_medium=paid_social&utm_campaign=connect_ecosystem&utm_content=telegram_join&utm_term=use_multiple_networks" class="btn-community btn-telegram" onclick="track('mid_telegram')" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+          Telegram
+        </a>
+        <a href="#updates" class="btn-primary" onclick="track('mid_email_updates')" style="padding:11px 22px;display:inline-flex;align-items:center;justify-content:center;gap:8px;">
+          Get launch updates
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="divider"></div>
+
+<!-- WHY NOW -->
+<section class="section">
+  <div class="section-inner">
+    <p class="eyebrow reveal">Why Now</p>
+    <h2 class="section-h2 reveal">Multichain adoption is growing.<br>The infrastructure hasn't kept up.</h2>
+    <div class="two-col" style="margin-top:48px;align-items:start;">
+      <div class="narrative reveal">
+        <p>The number of active blockchain networks continues to grow. More ecosystems, more users operating across multiple chains, more developers building for a fragmented landscape.</p>
+        <p>But the infrastructure layer connecting these networks has not evolved at the same pace. The tools exist. The coordination layer that makes them work together simply and reliably does not.</p>
+        <p>That gap is what Frame is focused on. Not a specific application or a single network, but the infrastructure that makes connected ecosystems possible.</p>
+      </div>
+      <div class="why-now-stats reveal">
+        <div class="stat-card">
+          <div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+          <div>
+            <p class="stat-label">Growing ecosystem</p>
+            <p class="stat-body">More networks. More users. More developers navigating between them every day.</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+          <div>
+            <p class="stat-label">Increasing fragmentation</p>
+            <p class="stat-body">Each new network adds to the coordination problem. The infrastructure gap widens.</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12,2 2,7 12,12 22,7"/><polyline points="2,17 12,22 22,17"/><polyline points="2,12 12,17 22,12"/></svg></div>
+          <div>
+            <p class="stat-label">Infrastructure moment</p>
+            <p class="stat-body">The conditions for a better coordination layer exist now. That is why Frame is focused on this problem, at this time.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRINCIPLES -->
+<section class="section">
+  <div class="section-inner">
+    <p class="eyebrow reveal">Frame's Answer</p>
+    <h2 class="section-h2 reveal">Infrastructure designed to make networks work together.</h2>
+
+    <p class="reveal" style="font-size:16px;color:var(--text-secondary);line-height:1.75;max-width:660px;">
+      The ads showed the clearest response to solution-first messaging: connection, simplicity, and a better way for existing networks to work together. 
+      This is the core of Frame's approach.
+    </p>
+
+    <div class="principles">
+
+      <div class="principle reveal">
+        <div class="principle-n">01</div>
+        <h4>Built for cross-network activity</h4>
+        <p>
+          Frame is not tied to one existing chain ecosystem. It is being built around the idea that value grows when networks can connect more easily, not when users are locked into one place.
+        </p>
+      </div>
+
+      <div class="principle reveal">
+        <div class="principle-n">02</div>
+        <h4>Connection without custody</h4>
+        <p>
+          Frame is focused on connection, not acting as a vault between chains. The goal is to help networks coordinate while users keep assets on their native chains.
+        </p>
+      </div>
+
+      <div class="principle reveal">
+        <div class="principle-n">03</div>
+        <h4>Designed to reduce extraction</h4>
+        <p>
+          Frame's design avoids the public mempool model and is built around simple, predictable participation. The aim is a cleaner network experience without pay-to-jump ordering dynamics.
+        </p>
+      </div>
+
+      <div class="principle reveal">
+        <div class="principle-n">04</div>
+        <h4>Not another isolated blockchain</h4>
+        <p>
+          Frame is focused on becoming a protocol layer that helps existing blockchains communicate. The goal is less fragmentation and a simpler way to use multiple networks.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FINAL CTA -->
+<section class="final-cta" id="community">
+  <div class="final-cta-box">
+    <div class="final-cta-glow"></div>
+    <p class="eyebrow reveal" style="margin-bottom:20px;">Early Community Access</p>
+    <h2 class="reveal">Follow the future of<br>connected networks.</h2>
+    <p class="final-cta-body reveal">Join a growing community exploring the future of connected blockchain infrastructure.</p>
+
+    <div class="final-email" id="updates">
+      <div id="ctaFormWrap">
+        <p style="font-family:'Chakra Petch',sans-serif;font-size:clamp(22px,3vw,32px);font-weight:600;letter-spacing:-0.02em;color:var(--text-primary);margin-bottom:20px;text-align:center;line-height:1.2;">Get the latest news on Frame's launch:</p>
+        <form class="email-form" id="ctaEmailForm" onsubmit="submitEmail(event)">
+          <input type="email" class="email-input" placeholder="Your email address" id="ctaEmail" autocomplete="email" required>
+          <button class="email-submit" type="submit">Subscribe</button>
+        </form>
+        <label class="privacy-consent" for="ctaPrivacy">
+          <input type="checkbox" id="ctaPrivacy" required>
+          <span>I accept the <a href="https://www.frame.community/lp/privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
+        </label>
+        <div class="email-benefits">
+          <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20,6 9,17 4,12"/></svg> Development updates</span>
+          <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20,6 9,17 4,12"/></svg> Ecosystem announcements</span>
+          <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20,6 9,17 4,12"/></svg> Early community access</span>
+        </div>
+      </div>
+      <div class="email-success" id="ctaSuccess">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20,6 9,17 4,12"/></svg>
+        You're on the list. We'll be in touch.
+      </div>
+    </div>
+
+    <div class="final-cta-btns reveal" style="margin-top:32px;">
+      <a href="https://www.frame.community/framead-discord?utm_source=x&utm_medium=paid_social&utm_campaign=connect_ecosystem&utm_content=discord_join&utm_term=use_multiple_networks" class="btn-community btn-discord" onclick="track('cta_discord')" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.032.056a19.9 19.9 0 0 0 5.993 3.03.077.077 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+        Join Discord
+      </a>
+      <a href="https://www.frame.community/framead-telegram?utm_source=x&utm_medium=paid_social&utm_campaign=connect_ecosystem&utm_content=telegram_join&utm_term=use_multiple_networks" class="btn-community btn-telegram" onclick="track('cta_telegram')" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        Join Telegram
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#top" style="display:flex;align-items:center;text-decoration:none;opacity:0.35;">
+    <svg height="18" viewBox="0 0 2931 1066" xmlns="http://www.w3.org/2000/svg" style="fill-rule:evenodd;clip-rule:evenodd;width:auto;">
+      <g transform="matrix(1,0,0,1,-34.60026,-0)"><g transform="matrix(1,0,0,0.355003,0,0)"><g transform="matrix(47.111312,0,0,132.706771,-81494.639315,-355857.259355)">
+        <path d="M1754.328,2688.67L1760.28,2688.67L1760.28,2690.05L1755.96,2690.05L1755.96,2692.378L1759.704,2692.378L1759.704,2693.758L1755.96,2693.758L1755.96,2697.07L1754.328,2697.07L1754.328,2688.67ZM1767.84,2694.286L1767.84,2697.07L1766.208,2697.07L1766.208,2694.658L1765.488,2693.854L1762.872,2693.854L1762.872,2697.07L1761.24,2697.07L1761.24,2688.67L1766.508,2688.67L1767.792,2689.966L1767.792,2692.51L1766.976,2693.338L1767.84,2694.286ZM1762.872,2692.51L1765.764,2692.51L1766.184,2692.09L1766.184,2690.458L1765.764,2690.038L1762.872,2690.038L1762.872,2692.51ZM1771.692,2688.67L1773.18,2688.67L1776.252,2697.07L1774.596,2697.07L1773.912,2695.21L1770.96,2695.21L1770.276,2697.07L1768.62,2697.07L1771.692,2688.67ZM1773.552,2693.866L1772.436,2690.674L1772.412,2690.674L1771.332,2693.866L1773.552,2693.866ZM1777.092,2688.67L1778.604,2688.67L1781.1,2694.094L1781.124,2694.094L1783.632,2688.67L1785.144,2688.67L1785.144,2697.07L1783.572,2697.07L1783.572,2691.958L1783.548,2691.958L1781.616,2695.894L1780.608,2695.894L1778.676,2691.958L1778.676,2697.07L1777.092,2697.07L1777.092,2688.67ZM1786.704,2688.67L1792.776,2688.67L1792.776,2690.05L1788.336,2690.05L1788.336,2692.174L1792.428,2692.174L1792.428,2693.53L1788.336,2693.53L1788.336,2695.69L1792.776,2695.69L1792.776,2697.07L1786.704,2697.07L1786.704,2688.67ZM1750.53,2688.682L1750.53,2696.859C1750.53,2697.778 1750.051,2698.691 1749.266,2699.17L1741.469,2703.873C1740.536,2704.443 1739.456,2704.064 1739.456,2702.971L1739.457,2697.487C1739.457,2697.426 1739.488,2697.369 1739.541,2697.338L1745.804,2693.53C1745.921,2693.46 1746.069,2693.544 1746.069,2693.681L1746.069,2695.812C1746.069,2695.873 1746.038,2695.93 1745.985,2695.961L1741.795,2698.54C1741.69,2698.603 1741.625,2698.717 1741.625,2698.839L1741.621,2700.626C1741.621,2700.898 1741.918,2701.067 1742.152,2700.926L1747.975,2697.455C1748.185,2697.329 1748.313,2697.102 1748.313,2696.856L1748.313,2688.845C1748.313,2688.586 1748.228,2688.231 1747.998,2688.11L1740.992,2683.861C1740.775,2683.746 1740.456,2683.695 1740.246,2683.822L1733.084,2688.221C1732.874,2688.348 1732.745,2688.517 1732.745,2688.762L1732.745,2696.261C1732.744,2696.814 1733.051,2697.262 1733.54,2697.52L1734.783,2698.248C1734.9,2698.317 1735.047,2698.291 1735.047,2698.156L1735.048,2690.102C1735.048,2689.857 1735.176,2689.63 1735.386,2689.503L1740.438,2686.448C1740.543,2686.385 1740.673,2686.381 1740.782,2686.438L1742.225,2687.315C1742.467,2687.442 1742.535,2687.667 1742.301,2687.808L1737.55,2690.702C1737.34,2690.828 1737.153,2691.056 1737.153,2691.302L1737.212,2701.873C1737.212,2702.077 1736.989,2702.203 1736.814,2702.098L1731.844,2699.103C1731.051,2698.625 1730.566,2697.825 1730.566,2696.899L1730.566,2688.599C1730.566,2687.705 1731.018,2686.872 1731.767,2686.385L1739.149,2681.958C1739.967,2681.425 1741.012,2681.388 1741.867,2681.861L1749.285,2686.372C1750.125,2686.836 1750.53,2687.721 1750.53,2688.682ZM1745.016,2688.954L1745.985,2689.578C1746.038,2689.609 1746.07,2689.666 1746.07,2689.728L1746.07,2690.611C1746.07,2690.673 1746.038,2690.73 1745.985,2690.761L1739.722,2694.568C1739.605,2694.638 1739.456,2694.554 1739.456,2694.418L1739.456,2692.287C1739.456,2692.226 1739.488,2692.169 1739.541,2692.138L1744.834,2688.954C1744.89,2688.92 1744.96,2688.92 1745.016,2688.954Z" style="fill:white;"/>
+      </g></g></g>
+    </svg>
+  </a>
+  <div class="footer-links">
+    <a href="https://www.frame.community/lp/privacy" target="_blank" rel="noopener">Privacy</a>
+    <a href="https://www.frame.community/framead-discord?utm_source=x&utm_medium=paid_social&utm_campaign=connect_ecosystem&utm_content=discord_join&utm_term=use_multiple_networks" target="_blank" rel="noopener">Discord</a>
+    <a href="https://www.frame.community/framead-telegram?utm_source=x&utm_medium=paid_social&utm_campaign=connect_ecosystem&utm_content=telegram_join&utm_term=use_multiple_networks" target="_blank" rel="noopener">Telegram</a>
+    <a href="https://www.frame.community/updates" target="_blank" rel="noopener">Updates</a>
+  </div>
+  <p class="footer-copy">© 2026 Frame · All rights reserved.</p>
+</footer>
+
+<!-- MOBILE STICKY -->
+<div class="mobile-sticky" id="mobileSticky">
+  <a href="#community" class="sticky-btn btn-primary-solid" onclick="track('mob_cta')" style="flex:1;">Get launch updates</a>
+</div>
+
+<script>
+function fireXEmail(){
+  try { if (typeof window.twq === 'function') window.twq('event', 'tw-oxskr-rbxug', {}); } catch(e) {}
+}
+
+function fireXDiscord(){
+  try { if (typeof window.twq === 'function') window.twq('event', 'tw-oxskr-rc5ck', {}); } catch(e) {}
+}
+
+function fireXTelegram(){
+  try { if (typeof window.twq === 'function') window.twq('event', 'tw-oxskr-rc5cl', {}); } catch(e) {}
+}
+
+function track(label){
+  try {
+    if (typeof gtag !== 'undefined') gtag('event','cta_click',{event_label:label});
+    if (label && label.indexOf('discord') !== -1) fireXDiscord();
+    if (label && label.indexOf('telegram') !== -1) fireXTelegram();
+  } catch(e) {}
+}
+
+function submitEmail(event){
+  if(event) event.preventDefault();
+  const input=document.getElementById('ctaEmail');
+  const privacy=document.getElementById('ctaPrivacy');
+  const wrap=document.getElementById('ctaFormWrap');
+  const succ=document.getElementById('ctaSuccess');
+  const email=input?input.value.trim():'';
+  if(!email||!email.includes('@')){if(input){input.style.outline='1px solid rgba(255,80,80,0.5)';setTimeout(()=>input.style.outline='',1500);}return;}
+  if(privacy && !privacy.checked){privacy.style.outline='1px solid rgba(255,80,80,0.5)';setTimeout(()=>privacy.style.outline='',1500);return;}
+  try{
+    if(typeof gtag!=='undefined'){
+      gtag('event','generate_lead',{event_category:'lead',event_label:'frame_lp_email'});
+      gtag('event','lead',{method:'email'});
+    }
+    fireXEmail();
+  }catch(e){}
+  if(wrap)wrap.style.display='none';
+  if(succ)succ.classList.add('show');
+}
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&document.activeElement?.id==='ctaEmail')submitEmail(e);});
+
+// HERO CANVAS
+(function(){
+  const c=document.getElementById('heroCanvas');if(!c)return;
+  const ctx=c.getContext('2d');let nodes=[],w,h;
+  const N=60,D=170;
+  function resize(){w=c.width=c.offsetWidth;h=c.height=c.offsetHeight;}
+  function init(){nodes=Array.from({length:N},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,r:Math.random()*1.8+0.8}));}
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    nodes.forEach(n=>{n.x+=n.vx;n.y+=n.vy;if(n.x<0||n.x>w)n.vx*=-1;if(n.y<0||n.y>h)n.vy*=-1;});
+    for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){const a=nodes[i],b=nodes[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);if(d<D){ctx.strokeStyle=`rgba(32,195,202,${(1-d/D)*0.15})`;ctx.lineWidth=0.5;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}}
+    nodes.forEach(n=>{ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,Math.PI*2);ctx.fillStyle='rgba(32,195,202,0.3)';ctx.fill();});
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',resize);resize();init();draw();
+})();
+
+// NETWORK CANVAS
+(function(){
+  const c=document.getElementById('networkCanvas');if(!c)return;
+  const ctx=c.getContext('2d');let w,h,t=0;
+  const hubs=['Network A','Network B','Network C','Network D','Network E'];
+  function resize(){w=c.width=c.offsetWidth;h=c.height=c.offsetHeight;}
+  function draw(){
+    if(!w||!h){requestAnimationFrame(draw);return;}
+    ctx.clearRect(0,0,w,h);t+=0.007;
+    const cx=w/2,cy=h/2,r=Math.min(w,h)*0.32;
+    const pos=hubs.map((_,i)=>{const a=(i/hubs.length)*Math.PI*2-Math.PI/2+Math.sin(t+i)*0.04;return{x:cx+Math.cos(a)*r,y:cy+Math.sin(a)*r,label:hubs[i]};});
+    pos.forEach((p,i)=>{
+      const pulse=(Math.sin(t*2+i*1.3)+1)/2,alpha=0.12+pulse*0.18;
+      const g=ctx.createLinearGradient(cx,cy,p.x,p.y);g.addColorStop(0,`rgba(32,195,202,${alpha*1.8})`);g.addColorStop(1,`rgba(32,195,202,${alpha*0.2})`);
+      ctx.strokeStyle=g;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(p.x,p.y);ctx.stroke();
+      const tp=(t*0.4+i*0.2)%1;ctx.beginPath();ctx.arc(cx+(p.x-cx)*tp,cy+(p.y-cy)*tp,2.5,0,Math.PI*2);ctx.fillStyle='rgba(32,195,202,0.85)';ctx.fill();
+    });
+    pos.forEach(p=>{
+      ctx.beginPath();ctx.arc(p.x,p.y,7,0,Math.PI*2);ctx.fillStyle='rgba(32,195,202,0.12)';ctx.fill();
+      ctx.strokeStyle='rgba(32,195,202,0.45)';ctx.lineWidth=1;ctx.stroke();
+      ctx.fillStyle='rgba(240,244,248,0.55)';ctx.font='10px Inter,sans-serif';ctx.textAlign='center';ctx.fillText(p.label,p.x,p.y+20);
+    });
+    ctx.beginPath();ctx.arc(cx,cy,12,0,Math.PI*2);ctx.fillStyle='rgba(32,195,202,0.1)';ctx.fill();
+    ctx.strokeStyle='rgba(32,195,202,0.6)';ctx.lineWidth=1.5;ctx.stroke();
+    ctx.beginPath();ctx.arc(cx,cy,5,0,Math.PI*2);ctx.fillStyle='#20C3CA';ctx.fill();
+    ctx.fillStyle='rgba(240,244,248,0.45)';ctx.font='10px "Chakra Petch",sans-serif';ctx.textAlign='center';ctx.fillText('Frame',cx,cy+26);
+    requestAnimationFrame(draw);
+  }
+  new ResizeObserver(resize).observe(c.parentElement);resize();draw();
+})();
+
+// ORBIT CANVAS
+(function(){
+  const c=document.getElementById('orbitCanvas');if(!c)return;
+  const ctx=c.getContext('2d');let w,h,t=0;
+  function resize(){w=c.width=c.offsetWidth;h=c.height=c.offsetHeight;}
+  function draw(){
+    if(!w||!h){requestAnimationFrame(draw);return;}
+    ctx.clearRect(0,0,w,h);t+=0.009;
+    const cx=w/2,cy=h/2,sc=Math.min(w,h)/300;
+    [55,95,135].forEach((r,i)=>{ctx.beginPath();ctx.arc(cx,cy,r*sc,0,Math.PI*2);ctx.strokeStyle=`rgba(32,195,202,${0.05+i*0.02})`;ctx.lineWidth=1;ctx.stroke();});
+    [{r:55,sp:1,sz:4,ph:0},{r:95,sp:-.65,sz:3.5,ph:2},{r:135,sp:.5,sz:3,ph:4},{r:55,sp:1,sz:3,ph:3.14},{r:95,sp:-.65,sz:4,ph:5.2}].forEach(o=>{
+      const ang=t*o.sp+o.ph,x=cx+Math.cos(ang)*o.r*sc,y=cy+Math.sin(ang)*o.r*sc;
+      for(let tr=1;tr<=10;tr++){const ta=ang-tr*.07;ctx.beginPath();ctx.arc(cx+Math.cos(ta)*o.r*sc,cy+Math.sin(ta)*o.r*sc,o.sz*(1-tr/12),0,Math.PI*2);ctx.fillStyle=`rgba(32,195,202,${(1-tr/12)*0.12})`;ctx.fill();}
+      ctx.beginPath();ctx.arc(x,y,o.sz,0,Math.PI*2);ctx.fillStyle='rgba(32,195,202,0.85)';ctx.fill();
+    });
+    const grd=ctx.createRadialGradient(cx,cy,0,cx,cy,22*sc);grd.addColorStop(0,'rgba(32,195,202,0.28)');grd.addColorStop(1,'rgba(32,195,202,0)');
+    ctx.beginPath();ctx.arc(cx,cy,22*sc,0,Math.PI*2);ctx.fillStyle=grd;ctx.fill();
+    ctx.beginPath();ctx.arc(cx,cy,5*sc,0,Math.PI*2);ctx.fillStyle='#20C3CA';ctx.fill();
+    requestAnimationFrame(draw);
+  }
+  new ResizeObserver(resize).observe(c.parentElement);resize();draw();
+})();
+
+// SCROLL REVEAL
+(function(){
+  const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}}),{threshold:0.05,rootMargin:'0px 0px 0px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+})();
+
+// UTM
+(function(){const p=new URLSearchParams(window.location.search),s={};['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(k=>{if(p.get(k))s[k]=p.get(k);});if(Object.keys(s).length)sessionStorage.setItem('frame_utms',JSON.stringify(s));})();
+</script>
+</body>
+</html>
