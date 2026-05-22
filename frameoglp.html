@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#080B0F">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Frame — Join the Community</title>
+<meta name="description" content="An OG status event is coming. Join the Frame community and participate now so you're ready when it happens.">
+<meta name="robots" content="noindex, nofollow">
+
+<!-- X Pixel -->
+<script type="text/javascript">
+  !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+  twq('config','rc5cl');
+</script>
+
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XZVD6XEV0H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XZVD6XEV0H');
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --cyan: #20C3CA;
+  --cyan-dim: rgba(32,195,202,0.10);
+  --cyan-glow: rgba(32,195,202,0.30);
+  --bg: #080B0F;
+  --bg-2: #0C1018;
+  --bg-card: rgba(255,255,255,0.03);
+  --border: rgba(255,255,255,0.07);
+  --border-cyan: rgba(32,195,202,0.22);
+  --text-primary: #F0F4F8;
+  --text-secondary: #8B9BAD;
+  --text-muted: #4A5568;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+}
+
+nav {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px clamp(24px, 5vw, 64px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo { display: flex; align-items: center; text-decoration: none; }
+.nav-logo img { height: 36px; width: auto; display: block; }
+
+.hero {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(48px, 8vw, 80px) clamp(24px, 5vw, 48px);
+  text-align: center;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(32,195,202,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 100% 40% at 50% 100%, rgba(8,11,15,0.95) 0%, transparent 60%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 560px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border-cyan);
+  background: var(--cyan-dim);
+  border-radius: 100px;
+  padding: 5px 14px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--cyan);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  animation: fadein 0.6s ease both;
+}
+
+.badge-dot {
+  width: 5px; height: 5px;
+  background: var(--cyan);
+  border-radius: 50%;
+  animation: pulsedot 2.2s ease-in-out infinite;
+}
+
+@keyframes pulsedot { 0%,100%{opacity:1;} 50%{opacity:0.35;} }
+@keyframes fadein { from{opacity:0;transform:translateY(14px);} to{opacity:1;transform:translateY(0);} }
+
+h1 {
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: clamp(28px, 6vw, 54px);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+  margin-bottom: 18px;
+  animation: fadein 0.6s 0.08s ease both;
+}
+
+h1 em { font-style: normal; color: var(--cyan); }
+
+.sub {
+  font-size: clamp(14px, 1.6vw, 17px);
+  color: var(--text-secondary);
+  max-width: 460px;
+  margin: 0 auto 36px;
+  line-height: 1.75;
+  animation: fadein 0.6s 0.14s ease both;
+}
+
+.points {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  max-width: 440px;
+  margin-bottom: 36px;
+  animation: fadein 0.6s 0.18s ease both;
+  text-align: left;
+}
+
+.point {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 16px 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  transition: border-color 0.2s;
+}
+
+.point:hover { border-color: var(--border-cyan); }
+
+.point-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--cyan-dim);
+  border: 1px solid var(--border-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--cyan);
+  margin-top: 1px;
+}
+
+.point-title {
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 3px;
+}
+
+.point p { font-size: 12px; color: var(--text-secondary); line-height: 1.65; }
+
+.btn-discord {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 440px;
+  background: var(--cyan);
+  color: #080B0F;
+  font-family: 'Inter', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  padding: 20px 28px;
+  border-radius: 14px;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: opacity 0.2s, transform 0.15s;
+  animation: fadein 0.6s 0.22s ease both;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 40px rgba(32,195,202,0.2);
+}
+
+.btn-discord:hover { opacity: 0.92; transform: translateY(-1px); }
+.btn-discord:active { transform: translateY(0); }
+
+.cta-note {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 12px;
+  max-width: 380px;
+  line-height: 1.6;
+  animation: fadein 0.6s 0.26s ease both;
+}
+
+.telegram-link {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--text-muted);
+  animation: fadein 0.6s 0.28s ease both;
+}
+
+.telegram-link a {
+  color: #5BC8F5;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(91,200,245,0.3);
+  transition: color 0.2s;
+}
+
+.telegram-link a:hover { color: #7DD6F8; }
+
+footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 18px clamp(24px, 5vw, 64px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-brand { font-size: 11px; color: var(--text-muted); }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { font-size: 11px; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--text-secondary); }
+
+@media(max-width: 640px) {
+  nav { padding: 16px 20px; }
+  .hero { padding: 36px 20px 48px; }
+  h1 { font-size: clamp(26px, 8vw, 36px); }
+  .btn-discord { font-size: 16px; padding: 18px 24px; }
+  footer { flex-direction: column; align-items: flex-start; gap: 10px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://www.frame.community" class="nav-logo" aria-label="Frame">
+    <img src="https://www.frame.community/brand/frame-wordmark-white.svg" alt="Frame" style="height:36px;width:auto;display:block;">
+  </a>
+</nav>
+
+<section class="hero">
+  <canvas class="hero-canvas" id="heroCanvas"></canvas>
+
+  <div class="hero-inner">
+
+    <div class="badge">
+      <span class="badge-dot"></span>
+      Frame Community · Join Early
+    </div>
+
+    <h1>Join now. Participate.<br>Be ready for the next <em>OG status event.</em></h1>
+
+    <p class="sub">Frame is building infrastructure for a more connected blockchain ecosystem. Join the Discord, get involved early, and be ready when the next OG status event opens.</p>
+
+    <div class="points">
+      <div class="point">
+        <div class="point-icon">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        </div>
+        <div>
+          <p class="point-title">Be ready before the next OG status event</p>
+          <p>Join now and start participating before the next event opens.</p>
+        </div>
+      </div>
+      <div class="point">
+        <div class="point-icon">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div>
+          <p class="point-title">OG status is about showing up</p>
+          <p>OG is meant for active members who pay attention and help build the early community.</p>
+        </div>
+      </div>
+      <div class="point">
+        <div class="point-icon">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+        </div>
+        <div>
+          <p class="point-title">The window will not stay open forever</p>
+          <p>There is no confirmed date yet. If you want to be early, now is the time to join.</p>
+        </div>
+      </div>
+    </div>
+
+    <a href="https://www.frame.community/lp/discord-join" class="btn-discord" onclick="trackDiscord()">
+      <svg width="20" height="20" viewBox="0 0 127.14 96.36" fill="#080B0F"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,33.24-1.71,57.79.54,82A105.73,105.73,0,0,0,32.71,96.36a77.7,77.7,0,0,0,6.89-11.3,68.42,68.42,0,0,1-10.84-5.18c.91-.66,1.8-1.34,2.66-2A75.57,75.57,0,0,0,95.71,77.9c.87.72,1.76,1.4,2.66,2a68.68,68.68,0,0,1-10.85,5.19,77,77,0,0,0,6.89,11.29A105.25,105.25,0,0,0,126.6,82C129.24,53.75,122.09,29.42,107.7,8.07ZM42.45,65.69C35.87,65.69,30.5,59.66,30.5,52.23S35.79,38.77,42.45,38.77,54.4,44.8,54.4,52.23,49.11,65.69,42.45,65.69Zm42.24,0c-6.58,0-11.95-6-11.95-13.46s5.29-13.46,11.95-13.46S96.64,44.8,96.64,52.23,91.35,65.69,84.69,65.69Z"/></svg>
+      Join the Frame Discord
+    </a>
+
+
+
+  </div>
+</section>
+
+<footer>
+  <span class="footer-brand">Frame Network · Infrastructure for a more connected ecosystem.</span>
+  <div class="footer-links">
+    <a href="https://www.frame.community/privacy" target="_blank" rel="noopener">Privacy</a>
+    <a href="https://www.frame.community" target="_blank" rel="noopener">frame.community</a>
+  </div>
+</footer>
+
+<script>
+function trackDiscord() {
+  try {
+    twq('event', 'tw-oxskr-rc5ck', {});
+    gtag('event', 'cta_click', { event_label: 'og_discord_join' });
+  } catch(e) {}
+}
+
+function trackTelegram() {
+  try {
+    twq('event', 'tw-oxskr-rc5cl', {});
+    gtag('event', 'cta_click', { event_label: 'og_telegram_join' });
+  } catch(e) {}
+}
+
+(function() {
+  const c = document.getElementById('heroCanvas');
+  if (!c) return;
+  const ctx = c.getContext('2d');
+  let nodes = [], w, h;
+  const N = 40, D = 140;
+  function resize() { w = c.width = c.offsetWidth; h = c.height = c.offsetHeight; }
+  function init() {
+    nodes = Array.from({ length: N }, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      vx: (Math.random() - .5) * .18, vy: (Math.random() - .5) * .18,
+      r: Math.random() * 1.5 + 0.6
+    }));
+  }
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+    nodes.forEach(n => {
+      n.x += n.vx; n.y += n.vy;
+      if (n.x < 0 || n.x > w) n.vx *= -1;
+      if (n.y < 0 || n.y > h) n.vy *= -1;
+    });
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const a = nodes[i], b = nodes[j];
+        const dx = a.x - b.x, dy = a.y - b.y;
+        const d = Math.sqrt(dx * dx + dy * dy);
+        if (d < D) {
+          ctx.strokeStyle = `rgba(32,195,202,${(1 - d / D) * 0.1})`;
+          ctx.lineWidth = 0.5;
+          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        }
+      }
+    }
+    nodes.forEach(n => {
+      ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(32,195,202,0.22)'; ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize', resize);
+  resize(); init(); draw();
+})();
+
+(function() {
+  const p = new URLSearchParams(window.location.search), s = {};
+  ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(k => { if (p.get(k)) s[k] = p.get(k); });
+  if (Object.keys(s).length) sessionStorage.setItem('frame_utms', JSON.stringify(s));
+})();
+</script>
+</body>
+</html>
