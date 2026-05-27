@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#080B0F">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Frame — The Multichain Thesis</title>
+<meta name="description" content="The next crypto cycle may not be won by one chain. Join the Frame Discord to read the Multichain Thesis.">
+<meta name="robots" content="noindex, nofollow">
+
+<!-- X Pixel -->
+<script type="text/javascript">
+  !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+  twq('config','rc5cl');
+</script>
+
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XZVD6XEV0H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XZVD6XEV0H');
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --cyan: #20C3CA;
+  --cyan-dim: rgba(32,195,202,0.10);
+  --cyan-glow: rgba(32,195,202,0.20);
+  --bg: #080B0F;
+  --bg-card: rgba(255,255,255,0.03);
+  --border: rgba(255,255,255,0.07);
+  --border-cyan: rgba(32,195,202,0.22);
+  --text-primary: #F0F4F8;
+  --text-secondary: #8B9BAD;
+  --text-muted: #4A5568;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+}
+
+/* NAV */
+nav {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px clamp(24px, 5vw, 64px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo { display: flex; align-items: center; text-decoration: none; }
+.nav-logo img { height: 28px; width: auto; display: block; }
+
+/* HERO */
+.hero {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(24px, 4vw, 40px) clamp(24px, 5vw, 48px);
+  text-align: center;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(32,195,202,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 100% 40% at 50% 100%, rgba(8,11,15,0.95) 0%, transparent 60%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 580px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* BADGE */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border-cyan);
+  background: var(--cyan-dim);
+  border-radius: 100px;
+  padding: 5px 14px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--cyan);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  animation: fadein 0.6s ease both;
+}
+
+.badge-dot {
+  width: 5px; height: 5px;
+  background: var(--cyan);
+  border-radius: 50%;
+  animation: pulsedot 2.2s ease-in-out infinite;
+}
+
+@keyframes pulsedot { 0%,100%{opacity:1;} 50%{opacity:0.35;} }
+@keyframes fadein { from{opacity:0;transform:translateY(14px);} to{opacity:1;transform:translateY(0);} }
+
+/* HEADLINE */
+h1 {
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: clamp(22px, 4.5vw, 38px);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin-bottom: 14px;
+  animation: fadein 0.6s 0.08s ease both;
+}
+
+h1 em {
+  font-style: normal;
+  color: var(--cyan);
+  font-size: clamp(38px, 8vw, 72px);
+  display: block;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+}
+
+.sub {
+  font-size: clamp(15px, 1.8vw, 18px);
+  color: var(--text-secondary);
+  max-width: 460px;
+  margin: 0 auto 14px;
+  line-height: 1.7;
+  animation: fadein 0.6s 0.12s ease both;
+}
+
+.intro {
+  font-size: 13px;
+  color: var(--text-muted);
+  max-width: 440px;
+  margin: 0 auto 32px;
+  line-height: 1.75;
+  animation: fadein 0.6s 0.16s ease both;
+}
+
+/* THESIS PREVIEW */
+.thesis-preview {
+  width: 100%;
+  max-width: 440px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-cyan);
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 28px;
+  animation: fadein 0.6s 0.18s ease both;
+  text-align: left;
+}
+
+.thesis-header {
+  background: rgba(32,195,202,0.06);
+  border-bottom: 1px solid var(--border-cyan);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.thesis-header-icon {
+  width: 28px;
+  height: 28px;
+  background: var(--cyan-dim);
+  border: 1px solid var(--border-cyan);
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cyan);
+  flex-shrink: 0;
+}
+
+.thesis-header-text {
+  flex: 1;
+}
+
+.thesis-title {
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.04em;
+}
+
+.thesis-subtitle {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.thesis-lock {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--cyan-dim);
+  border: 1px solid var(--border-cyan);
+  border-radius: 100px;
+  padding: 3px 8px;
+  font-size: 10px;
+  color: var(--cyan);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.thesis-body {
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.thesis-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.thesis-num {
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: 11px;
+  color: var(--cyan);
+  font-weight: 600;
+  flex-shrink: 0;
+  margin-top: 1px;
+  width: 16px;
+}
+
+.thesis-item-text {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.thesis-item-text strong {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.thesis-blur {
+  position: relative;
+  margin-top: 4px;
+}
+
+.thesis-blur-row {
+  height: 10px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.06);
+  margin-bottom: 6px;
+}
+
+.thesis-blur-row:last-child { width: 60%; margin-bottom: 0; }
+
+.thesis-blur-overlay {
+  position: absolute;
+  inset: -8px 0 0;
+  background: linear-gradient(to bottom, transparent 0%, rgba(8,11,15,0.95) 100%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 4px;
+}
+
+.thesis-unlock {
+  font-size: 11px;
+  color: var(--cyan);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* CTA */
+.btn-discord {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 440px;
+  background: var(--cyan);
+  color: #080B0F;
+  font-family: 'Inter', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  padding: 20px 28px;
+  border-radius: 14px;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: opacity 0.2s, transform 0.15s;
+  animation: fadein 0.6s 0.22s ease both;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 40px rgba(32,195,202,0.2);
+  margin-bottom: 14px;
+}
+
+.btn-discord:hover { opacity: 0.92; transform: translateY(-1px); }
+.btn-discord:active { transform: translateY(0); }
+
+/* CARDS */
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 440px;
+  margin-top: 28px;
+  animation: fadein 0.6s 0.26s ease both;
+  text-align: left;
+}
+
+.card {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  transition: border-color 0.2s;
+}
+
+.card:hover { border-color: var(--border-cyan); }
+
+.card-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  background: var(--cyan-dim);
+  border: 1px solid var(--border-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--cyan);
+  margin-top: 1px;
+}
+
+.card-title {
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.card p { font-size: 11px; color: var(--text-secondary); line-height: 1.6; }
+
+/* FOOTER */
+footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 18px clamp(24px, 5vw, 64px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-brand { font-size: 11px; color: var(--text-muted); }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { font-size: 11px; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--text-secondary); }
+
+@media(max-width: 640px) {
+  nav { padding: 16px 20px; }
+  .hero { padding: 36px 20px 48px; }
+  h1 { font-size: clamp(26px, 8vw, 36px); }
+  .btn-discord { font-size: 16px; padding: 18px 24px; }
+  footer { flex-direction: column; align-items: flex-start; gap: 10px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://www.frame.community" class="nav-logo" aria-label="Frame">
+    <img src="https://www.frame.community/brand/frame-wordmark-white.svg" alt="Frame" style="height:36px;width:auto;display:block;">
+  </a>
+</nav>
+
+<section class="hero">
+  <canvas class="hero-canvas" id="heroCanvas"></canvas>
+
+  <div class="hero-inner">
+
+    <div class="badge">
+      <span class="badge-dot"></span>
+      Frame Community · The Multichain Thesis
+    </div>
+
+    <h1>The next cycle<br>might not be about<br><em>one chain.</em></h1>
+
+    <p class="sub">It might be about a chain built to connect them.</p>
+
+    <p class="intro" style="color:#8B9BAD;">Join the Frame Discord to read the short Frame Multichain Thesis and follow the discussion around cross-chain settlement, AI agents, and connected blockchain infrastructure.</p>
+
+    <!-- CTA above thesis -->
+    <a href="https://discord.gg/rtpYXWmp94" class="btn-discord" onclick="trackDiscord()" style="margin-bottom:28px;">
+      <svg width="20" height="20" viewBox="0 0 127.14 96.36" fill="#080B0F"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,33.24-1.71,57.79.54,82A105.73,105.73,0,0,0,32.71,96.36a77.7,77.7,0,0,0,6.89-11.3,68.42,68.42,0,0,1-10.84-5.18c.91-.66,1.8-1.34,2.66-2A75.57,75.57,0,0,0,95.71,77.9c.87.72,1.76,1.4,2.66,2a68.68,68.68,0,0,1-10.85,5.19,77,77,0,0,0,6.89,11.29A105.25,105.25,0,0,0,126.6,82C129.24,53.75,122.09,29.42,107.7,8.07ZM42.45,65.69C35.87,65.69,30.5,59.66,30.5,52.23S35.79,38.77,42.45,38.77,54.4,44.8,54.4,52.23,49.11,65.69,42.45,65.69Zm42.24,0c-6.58,0-11.95-6-11.95-13.46s5.29-13.46,11.95-13.46S96.64,44.8,96.64,52.23,91.35,65.69,84.69,65.69Z"/></svg>
+      Join Discord and Read the Thesis
+    </a>
+
+    <!-- Thesis preview -->
+    <div class="thesis-preview">
+      <div class="thesis-header">
+        <div class="thesis-header-icon">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+        </div>
+        <div class="thesis-header-text">
+          <div class="thesis-title">THE FRAME MULTICHAIN THESIS</div>
+          <div class="thesis-subtitle">Why the multichain future needs better rails</div>
+        </div>
+        <div class="thesis-lock">
+          <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Discord only
+        </div>
+      </div>
+      <div class="thesis-body">
+        <div class="thesis-item">
+          <span class="thesis-num">01</span>
+          <div class="thesis-item-text"><strong>Crypto is not consolidating into one chain.</strong> Ethereum, Solana, Base, Arbitrum and newer ecosystems all continue to attract users, apps, and liquidity.</div>
+        </div>
+        <div class="thesis-item">
+          <span class="thesis-num">02</span>
+          <div class="thesis-item-text"><strong>More chains create more fragmentation.</strong> Every new ecosystem creates more wallets, gas balances, bridges, routing problems, and liquidity silos.</div>
+        </div>
+        <div class="thesis-item">
+          <span class="thesis-num">03</span>
+          <div class="thesis-item-text"><strong>Fragmentation creates the need for connection.</strong> If users and apps operate across many chains, infrastructure connecting those ecosystems becomes more important over time.</div>
+        </div>
+        <!-- Blurred preview -->
+        <div class="thesis-blur">
+          <div class="thesis-item" style="opacity:0.3;">
+            <span class="thesis-num">04</span>
+            <div class="thesis-item-text"><strong>Frame's thesis is different...</strong></div>
+          </div>
+          <div style="margin-top:8px;opacity:0.15;">
+            <div class="thesis-blur-row" style="width:100%"></div>
+            <div class="thesis-blur-row" style="width:85%"></div>
+            <div class="thesis-blur-row" style="width:92%"></div>
+            <div class="thesis-blur-row"></div>
+          </div>
+          <div class="thesis-blur-overlay">
+            <div class="thesis-unlock">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Join Discord to read the full thesis
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-size:13px;color:#8B9BAD;margin-top:20px;text-align:center;line-height:1.6;">The full thesis and the discussion are <a href="https://discord.gg/rtpYXWmp94" onclick="trackDiscord()" style="color:#20C3CA;text-decoration:none;border-bottom:1px solid rgba(32,195,202,0.3);">live in Discord now.</a> Join to be part of it.</p>
+
+  </div>
+</section>
+
+<footer>
+  <span class="footer-brand">Frame Network · Infrastructure for a more connected ecosystem.</span>
+  <div class="footer-links">
+    <a href="https://www.frame.community/privacy" target="_blank" rel="noopener">Privacy</a>
+    <a href="https://www.frame.community" target="_blank" rel="noopener">frame.community</a>
+  </div>
+</footer>
+
+<script>
+function trackDiscord() {
+  try {
+    twq('event', 'tw-oxskr-rc5ck', {});
+    gtag('event', 'cta_click', { event_label: 'thesis_discord_join' });
+  } catch(e) {}
+}
+
+(function() {
+  const c = document.getElementById('heroCanvas');
+  if (!c) return;
+  const ctx = c.getContext('2d');
+  let nodes = [], w, h;
+  const N = 40, D = 140;
+  function resize() { w = c.width = c.offsetWidth; h = c.height = c.offsetHeight; }
+  function init() {
+    nodes = Array.from({ length: N }, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      vx: (Math.random() - .5) * .18, vy: (Math.random() - .5) * .18,
+      r: Math.random() * 1.5 + 0.6
+    }));
+  }
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+    nodes.forEach(n => {
+      n.x += n.vx; n.y += n.vy;
+      if (n.x < 0 || n.x > w) n.vx *= -1;
+      if (n.y < 0 || n.y > h) n.vy *= -1;
+    });
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const a = nodes[i], b = nodes[j];
+        const dx = a.x - b.x, dy = a.y - b.y;
+        const d = Math.sqrt(dx * dx + dy * dy);
+        if (d < D) {
+          ctx.strokeStyle = `rgba(32,195,202,${(1 - d / D) * 0.1})`;
+          ctx.lineWidth = 0.5;
+          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        }
+      }
+    }
+    nodes.forEach(n => {
+      ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(32,195,202,0.22)'; ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize', resize);
+  resize(); init(); draw();
+})();
+
+(function() {
+  const p = new URLSearchParams(window.location.search), s = {};
+  ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(k => {
+    if (p.get(k)) s[k] = p.get(k);
+  });
+  if (Object.keys(s).length) sessionStorage.setItem('frame_utms', JSON.stringify(s));
+})();
+</script>
+</body>
+</html>
